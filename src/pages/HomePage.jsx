@@ -15,7 +15,9 @@ function HomePage() {
   return (
     <div className="relative overflow-hidden" id="top">
       <div className="pointer-events-none fixed inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:86px_86px] [mask-image:radial-gradient(circle_at_center,black_45%,transparent_92%)]" />
-      <SiteNavbar />
+      <div className="absolute inset-x-0 top-0 z-40">
+        <SiteNavbar />
+      </div>
       <FloatingWhatsAppButton />
       <PageTransition>
         <HeroSection />

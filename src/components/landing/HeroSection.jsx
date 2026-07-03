@@ -15,13 +15,29 @@ function HeroSection() {
       }
 
   return (
-    <section className="relative overflow-hidden px-0 pt-5 pb-20 md:pb-14">
+    <section className="relative overflow-hidden px-0 pt-28 pb-20 md:pt-32 md:pb-14">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-x-0 top-0 h-full bg-[linear-gradient(180deg,#050507_0%,#090611_32%,#080510_70%,#050505_100%)]" />
-        <div className="absolute -top-24 left-[-8%] h-[340px] w-[340px] rounded-full bg-[#8c36ff]/18 blur-3xl" />
-        <div className="absolute top-[12%] right-[-6%] h-[300px] w-[300px] rounded-full bg-[#b467ff]/14 blur-3xl" />
-        <div className="absolute bottom-[12%] left-[12%] h-[220px] w-[220px] rounded-full bg-[#6c2cff]/10 blur-3xl" />
-        <div className="absolute inset-x-[18%] top-[20%] h-[420px] bg-[radial-gradient(circle,_rgba(180,103,255,0.12)_0%,_rgba(180,103,255,0.05)_28%,_transparent_72%)] blur-3xl" />
+        <motion.div
+          className="absolute -top-24 left-[-8%] h-[340px] w-[340px] rounded-full bg-[#8c36ff]/18 blur-3xl"
+          animate={prefersReducedMotion ? undefined : { x: [-12, 10, -12], y: [0, 14, 0], scale: [1, 1.08, 1] }}
+          transition={{ duration: 10.2, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute top-[12%] right-[-6%] h-[300px] w-[300px] rounded-full bg-[#b467ff]/14 blur-3xl"
+          animate={prefersReducedMotion ? undefined : { x: [10, -12, 10], y: [0, -10, 0], scale: [1.02, 0.95, 1.02] }}
+          transition={{ duration: 11.4, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute bottom-[12%] left-[12%] h-[220px] w-[220px] rounded-full bg-[#6c2cff]/10 blur-3xl"
+          animate={prefersReducedMotion ? undefined : { x: [0, 16, 0], y: [0, -8, 0], opacity: [0.55, 0.82, 0.55] }}
+          transition={{ duration: 9.6, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute inset-x-[18%] top-[20%] h-[420px] bg-[radial-gradient(circle,_rgba(180,103,255,0.12)_0%,_rgba(180,103,255,0.05)_28%,_transparent_72%)] blur-3xl"
+          animate={prefersReducedMotion ? undefined : { scale: [0.96, 1.04, 0.96], opacity: [0.45, 0.75, 0.45] }}
+          transition={{ duration: 8.8, repeat: Infinity, ease: 'easeInOut' }}
+        />
 
         <motion.div
           aria-hidden="true"
@@ -75,6 +91,13 @@ function HeroSection() {
             </motion.div>
 
             <motion.div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-[12%] h-[150px] w-[72%] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(180,103,255,0.24)_0%,_rgba(180,103,255,0.1)_32%,_transparent_74%)] blur-3xl"
+              animate={prefersReducedMotion ? undefined : { scale: [0.96, 1.05, 0.96], opacity: [0.35, 0.7, 0.35] }}
+              transition={{ duration: 6.4, repeat: Infinity, ease: 'easeInOut' }}
+            />
+
+            <motion.div
               className="relative mx-auto mb-5 w-full max-w-[1240px] overflow-hidden rounded-[6px] p-px shadow-[0_24px_80px_rgba(0,0,0,0.36)]"
               initial={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.985, y: 16 }}
               animate={
@@ -123,7 +146,19 @@ function HeroSection() {
                   <motion.span
                     className="block whitespace-nowrap"
                     initial={prefersReducedMotion ? undefined : { opacity: 0, y: 18 }}
-                    animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+                    animate={
+                      prefersReducedMotion
+                        ? undefined
+                        : {
+                            opacity: 1,
+                            y: 0,
+                            textShadow: [
+                              '0 0 0 rgba(255,255,255,0)',
+                              '0 0 18px rgba(255,255,255,0.06)',
+                              '0 0 0 rgba(255,255,255,0)',
+                            ],
+                          }
+                    }
                     transition={{ delay: 0.28, duration: 0.95, ease: smoothEase }}
                   >
                     Win admission to top universities with
@@ -278,10 +313,11 @@ function HeroSection() {
                 className="w-full max-w-[740px]"
               >
                 <Link
-                  className="inline-flex min-h-[70px] w-full items-center justify-center gap-3 bg-gradient-to-r from-[#bb72ff] via-[#b467ff] to-[#9a4df8] px-[18px] text-center [font-family:'Outfit',sans-serif] text-xl font-semibold uppercase text-white sm:min-h-[82px] sm:px-7 sm:text-[1.65rem] md:text-[2rem]"
+                  className="group relative inline-flex min-h-[70px] w-full items-center justify-center gap-3 overflow-hidden bg-gradient-to-r from-[#bb72ff] via-[#b467ff] to-[#9a4df8] px-[18px] text-center [font-family:'Outfit',sans-serif] text-xl font-semibold uppercase text-white shadow-[0_18px_40px_rgba(140,54,255,0.25)] sm:min-h-[82px] sm:px-7 sm:text-[1.65rem] md:text-[2rem]"
                   to="/program"
                 >
-                  Book Consultation Session <ArrowRight size={22} />
+                  <span className="pointer-events-none absolute inset-y-0 left-[-24%] w-[24%] -skew-x-12 bg-white/25 blur-md transition-transform duration-700 group-hover:translate-x-[520%]" />
+                  <span className="relative">Book Consultation Session</span> <ArrowRight className="relative transition-transform duration-300 group-hover:translate-x-1" size={22} />
                 </Link>
               </motion.div>
 
