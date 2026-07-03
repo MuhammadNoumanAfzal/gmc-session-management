@@ -1,10 +1,27 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Clock3, Star } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { floatingIcons } from "../../data/masterclass";
 
+const titleMessages = [
+  {
+    line1: "Win admission to top universities with",
+    line2: "fully funded scholarship guidance",
+  },
+  {
+    line1: "Build a stronger profile for global admits",
+    line2: "with expert scholarship strategy",
+  },
+  {
+    line1: "Turn your dream shortlist into real offers",
+    line2: "with clearer admission planning",
+  },
+];
+
 function HeroSection() {
   const prefersReducedMotion = useReducedMotion();
+  const [activeTitleIndex, setActiveTitleIndex] = useState(0);
 
   const smoothEase = [0.22, 1, 0.36, 1];
   const heroReveal = prefersReducedMotion
@@ -13,6 +30,22 @@ function HeroSection() {
         initial: { opacity: 0, y: 26, filter: "blur(8px)" },
         animate: { opacity: 1, y: 0, filter: "blur(0px)" },
       };
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      return undefined;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setActiveTitleIndex((currentIndex) =>
+        currentIndex === titleMessages.length - 1 ? 0 : currentIndex + 1,
+      );
+    }, 3200);
+
+    return () => window.clearInterval(intervalId);
+  }, [prefersReducedMotion]);
+
+  const activeTitle = titleMessages[activeTitleIndex];
 
   return (
     <section className="relative overflow-hidden px-0 pt-28 pb-20 md:pt-22 md:pb-14">
@@ -366,7 +399,7 @@ function HeroSection() {
                       : { x: ["0%", "820%"], opacity: [0, 1, 1, 0] }
                   }
                   transition={{
-                    duration: 6.6,
+                    duration: 3.1,
                     repeat: Infinity,
                     ease: "linear",
                   }}
@@ -377,55 +410,61 @@ function HeroSection() {
                   animate={
                     prefersReducedMotion
                       ? undefined
-                      : { y: [0, 18, 0], opacity: [0.35, 1, 0.35] }
+                      : { y: [0, 18, 0], x: [0, -10, 0], opacity: [0.35, 1, 0.35] }
                   }
                   transition={{
-                    duration: 3.4,
+                    duration: 1.9,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
                 />
                 <h1 className="relative [font-family:'Outfit',sans-serif] text-[1.9rem] leading-[1.04] font-bold text-white sm:text-[2.3rem] md:text-[2.8rem] lg:text-[3.2rem] xl:text-[3.55rem]">
-                  <motion.span
-                    className="block whitespace-nowrap"
-                    initial={
-                      prefersReducedMotion ? undefined : { opacity: 0, y: 18 }
-                    }
-                    animate={
-                      prefersReducedMotion
-                        ? undefined
-                        : {
-                            opacity: 1,
-                            y: 0,
-                            textShadow: [
-                              "0 0 0 rgba(255,255,255,0)",
-                              "0 0 18px rgba(255,255,255,0.06)",
-                              "0 0 0 rgba(255,255,255,0)",
-                            ],
-                          }
-                    }
-                    transition={{
-                      delay: 0.28,
-                      duration: 0.95,
-                      ease: smoothEase,
-                    }}
-                  >
-                    Win admission to top universities with
-                  </motion.span>
-                  <motion.span
-                    className="block"
-                    initial={
-                      prefersReducedMotion ? undefined : { opacity: 0, y: 18 }
-                    }
-                    animate={
-                      prefersReducedMotion ? undefined : { opacity: 1, y: 0 }
-                    }
-                    transition={{ delay: 0.42, duration: 1, ease: smoothEase }}
-                  >
-                    <span className="bg-gradient-to-r from-[#deb8ff] via-[#b467ff] to-[#8d42ff] bg-clip-text text-transparent">
-                      fully funded scholarship guidance
-                    </span>
-                  </motion.span>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeTitleIndex}
+                      initial={
+                        prefersReducedMotion
+                          ? undefined
+                          : { opacity: 0, y: 22, filter: "blur(10px)" }
+                      }
+                      animate={
+                        prefersReducedMotion
+                          ? undefined
+                          : {
+                              opacity: 1,
+                              y: 0,
+                              filter: "blur(0px)",
+                            }
+                      }
+                      exit={
+                        prefersReducedMotion
+                          ? undefined
+                          : { opacity: 0, y: -18, filter: "blur(8px)" }
+                      }
+                      transition={{ duration: 0.72, ease: smoothEase }}
+                    >
+                      <motion.span
+                        className="block whitespace-nowrap"
+                        animate={
+                          prefersReducedMotion
+                            ? undefined
+                            : {
+                                textShadow: [
+                                  "0 0 0 rgba(255,255,255,0)",
+                                  "0 0 18px rgba(255,255,255,0.06)",
+                                  "0 0 0 rgba(255,255,255,0)",
+                                ],
+                              }
+                        }
+                        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        {activeTitle.line1}
+                      </motion.span>
+                      <span className="block bg-gradient-to-r from-[#deb8ff] via-[#b467ff] to-[#8d42ff] bg-clip-text text-transparent">
+                        {activeTitle.line2}
+                      </span>
+                    </motion.div>
+                  </AnimatePresence>
                 </h1>
               </div>
             </motion.div>
