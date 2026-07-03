@@ -1,4 +1,4 @@
-import { Menu, MessageCircle } from 'lucide-react'
+import { ArrowUpRight, Menu } from 'lucide-react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -71,11 +71,15 @@ function SiteNavbar() {
             transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
           >
           <Link
-            className="group relative inline-flex min-h-[46px] items-center justify-center gap-2 overflow-hidden rounded-[16px] border border-[#d8beff33] bg-gradient-to-r from-[#bb72ff] via-[#b467ff] to-[#8f3cff] px-5 [font-family:'Outfit',sans-serif] text-sm font-semibold uppercase text-white shadow-[0_14px_30px_rgba(140,54,255,0.24)] transition hover:-translate-y-0.5"
+            className="group relative inline-flex min-h-[48px] items-center justify-center gap-2 overflow-hidden rounded-[18px] border border-[#b7fff14a] bg-[linear-gradient(135deg,#0e2f31_0%,#145457_48%,#22a8a1_100%)] px-5 [font-family:'Outfit',sans-serif] text-sm font-semibold uppercase tracking-[0.03em] text-white shadow-[0_20px_38px_rgba(5,35,36,0.34),inset_0_1px_0_rgba(255,255,255,0.12)] transition duration-300 hover:-translate-y-0.5 hover:border-[#ddfffb80] hover:shadow-[0_24px_44px_rgba(9,60,62,0.42),inset_0_1px_0_rgba(255,255,255,0.18)]"
             to="/program"
           >
-            <span className="pointer-events-none absolute inset-y-0 left-[-30%] w-[32%] -skew-x-12 bg-white/20 blur-md transition-transform duration-700 group-hover:translate-x-[360%]" />
-            <MessageCircle size={16} />
+            <span className="pointer-events-none absolute inset-[1px] rounded-[17px] bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0)_34%)]" />
+            <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_50%,rgba(190,255,245,0.18),transparent_24%),radial-gradient(circle_at_18%_18%,rgba(255,255,255,0.12),transparent_22%)]" />
+            <span className="pointer-events-none absolute -left-[18%] top-0 h-full w-[24%] -skew-x-12 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.24),transparent)] blur-md transition-transform duration-700 group-hover:translate-x-[430%]" />
+            <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-full border border-white/18 bg-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.16)]">
+              <ArrowUpRight size={15} />
+            </span>
             <span className="relative">Book Consultation Session</span>
           </Link>
           </motion.div>
@@ -111,11 +115,11 @@ function SiteNavbar() {
               </a>
             ))}
             <Link
-              className="mt-1 inline-flex min-h-[48px] items-center justify-center gap-2 rounded-[16px] bg-gradient-to-r from-[#bb72ff] via-[#b467ff] to-[#9a4df8] px-5 [font-family:'Outfit',sans-serif] text-sm font-semibold uppercase text-white shadow-[0_14px_30px_rgba(140,54,255,0.22)]"
+              className="mt-1 inline-flex min-h-[50px] items-center justify-center gap-2 rounded-[18px] border border-[#b7fff14a] bg-[linear-gradient(135deg,#0e2f31_0%,#145457_48%,#22a8a1_100%)] px-5 [font-family:'Outfit',sans-serif] text-sm font-semibold uppercase tracking-[0.03em] text-white shadow-[0_20px_38px_rgba(5,35,36,0.34),inset_0_1px_0_rgba(255,255,255,0.12)]"
               onClick={() => setOpen(false)}
               to="/program"
             >
-              <MessageCircle size={16} />
+              <ArrowUpRight size={16} />
               Book Consultation Session
             </Link>
           </div>

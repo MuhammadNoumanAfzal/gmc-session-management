@@ -547,11 +547,6 @@ function HeroSection() {
                     : {
                         opacity: 1,
                         y: 0,
-                        boxShadow: [
-                          "0 18px 40px rgba(140,54,255,0.24)",
-                          "0 21px 46px rgba(140,54,255,0.29)",
-                          "0 18px 40px rgba(140,54,255,0.24)",
-                        ],
                       }
                 }
                 viewport={{ once: true, amount: 0.55 }}
@@ -565,7 +560,6 @@ function HeroSection() {
                 transition={{
                   opacity: { duration: 0.45, ease: smoothEase },
                   y: { duration: 0.45, ease: smoothEase },
-                  boxShadow: { duration: 0.55, ease: smoothEase },
                   default: {
                     duration: 6.8,
                     repeat: Infinity,
@@ -575,15 +569,24 @@ function HeroSection() {
                 className="w-full max-w-[740px]"
               >
                 <Link
-                  className="group relative inline-flex min-h-[70px] w-full items-center justify-center gap-3 overflow-hidden bg-gradient-to-r from-[#bb72ff] via-[#b467ff] to-[#9a4df8] px-[18px] text-center [font-family:'Outfit',sans-serif] text-xl font-semibold uppercase text-white shadow-[0_18px_40px_rgba(140,54,255,0.25)] sm:min-h-[82px] sm:px-7 sm:text-[1.65rem] md:text-[2rem]"
+                  className="group relative inline-flex min-h-[76px] w-full items-center justify-between overflow-hidden rounded-[24px] border border-[#b7fff14a] bg-[linear-gradient(135deg,#16716b_0%,#1f8f8a_48%,#3bc5bc_100%)] px-5 py-4 text-left shadow-[0_10px_22px_rgba(8,60,58,0.14),inset_0_1px_0_rgba(255,255,255,0.14)] transition duration-300 hover:-translate-y-1 hover:border-[#ddfffb80] hover:shadow-[0_14px_28px_rgba(9,78,76,0.18),inset_0_1px_0_rgba(255,255,255,0.18)] sm:min-h-[88px] sm:px-6"
                   to="/program"
                 >
-                  <span className="pointer-events-none absolute inset-y-0 left-[-24%] w-[24%] -skew-x-12 bg-white/25 blur-md transition-transform duration-700 group-hover:translate-x-[520%]" />
-                  <span className="relative">Book Consultation Session</span>{" "}
-                  <ArrowRight
-                    className="relative transition-transform duration-300 group-hover:translate-x-1"
-                    size={22}
-                  />
+               
+                  <span className="relative flex min-w-0 flex-col pr-4">
+                    <span className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.26em] text-[#d9fffb] sm:text-[0.72rem]">
+                      Start Here
+                    </span>
+                    <span className="[font-family:'Outfit',sans-serif] text-[1.05rem] font-semibold uppercase leading-[1.05] tracking-[0.02em] text-white sm:text-[1.4rem] md:text-[1.72rem]">
+                      Book Consultation Session
+                    </span>
+                  </span>
+                  <span className="relative ml-3 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/24 bg-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur-sm transition duration-300 group-hover:scale-105 group-hover:bg-white/16 sm:h-14 sm:w-14">
+                    <ArrowRight
+                      className="transition-transform duration-300 group-hover:translate-x-0.5"
+                      size={24}
+                    />
+                  </span>
                 </Link>
               </motion.div>
 
