@@ -18,7 +18,7 @@ function SiteNavbar() {
   return (
     <header className="sticky top-0 z-40 px-3 pt-3 sm:px-4">
       <motion.div
-        className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[24px] border border-white/10 bg-[#08080b]/72 shadow-[0_18px_60px_rgba(0,0,0,0.28)] backdrop-blur-xl"
+        className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[24px] border border-white/10 bg-transparent shadow-none backdrop-blur-0"
         initial={prefersReducedMotion ? undefined : { opacity: 0, y: -16 }}
         animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -29,8 +29,6 @@ function SiteNavbar() {
           animate={prefersReducedMotion ? undefined : { x: ['-12%', '12%', '-12%'] }}
           transition={{ duration: 5.8, repeat: Infinity, ease: 'linear' }}
         />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(180,103,255,0.12),transparent_32%),radial-gradient(circle_at_top_right,rgba(255,255,255,0.06),transparent_28%)]" />
-
         <div className="relative mx-auto flex w-full items-center justify-between px-4 py-3 sm:px-5">
         <a className="inline-flex items-center gap-3" href="#top">
           <span className="relative grid h-10 w-10 place-items-center rounded-2xl border border-white/10 bg-white/[0.04] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">

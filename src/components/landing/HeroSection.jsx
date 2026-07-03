@@ -1,18 +1,18 @@
-import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, Clock3, Star } from 'lucide-react'
-import { Link } from 'react-router-dom'
-import { floatingIcons } from '../../data/masterclass'
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, Clock3, Star } from "lucide-react";
+import { Link } from "react-router-dom";
+import { floatingIcons } from "../../data/masterclass";
 
 function HeroSection() {
-  const prefersReducedMotion = useReducedMotion()
+  const prefersReducedMotion = useReducedMotion();
 
-  const smoothEase = [0.22, 1, 0.36, 1]
+  const smoothEase = [0.22, 1, 0.36, 1];
   const heroReveal = prefersReducedMotion
     ? {}
     : {
-        initial: { opacity: 0, y: 26, filter: 'blur(8px)' },
-        animate: { opacity: 1, y: 0, filter: 'blur(0px)' },
-      }
+        initial: { opacity: 0, y: 26, filter: "blur(8px)" },
+        animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+      };
 
   return (
     <section className="relative overflow-hidden px-0 pt-28 pb-20 md:pt-32 md:pb-14">
@@ -20,48 +20,93 @@ function HeroSection() {
         <div className="absolute inset-x-0 top-0 h-full bg-[linear-gradient(180deg,#050507_0%,#090611_32%,#080510_70%,#050505_100%)]" />
         <motion.div
           className="absolute -top-24 left-[-8%] h-[340px] w-[340px] rounded-full bg-[#8c36ff]/18 blur-3xl"
-          animate={prefersReducedMotion ? undefined : { x: [-12, 10, -12], y: [0, 14, 0], scale: [1, 1.08, 1] }}
-          transition={{ duration: 10.2, repeat: Infinity, ease: 'easeInOut' }}
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { x: [-12, 10, -12], y: [0, 14, 0], scale: [1, 1.08, 1] }
+          }
+          transition={{ duration: 10.2, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute top-[12%] right-[-6%] h-[300px] w-[300px] rounded-full bg-[#b467ff]/14 blur-3xl"
-          animate={prefersReducedMotion ? undefined : { x: [10, -12, 10], y: [0, -10, 0], scale: [1.02, 0.95, 1.02] }}
-          transition={{ duration: 11.4, repeat: Infinity, ease: 'easeInOut' }}
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { x: [10, -12, 10], y: [0, -10, 0], scale: [1.02, 0.95, 1.02] }
+          }
+          transition={{ duration: 11.4, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-[12%] left-[12%] h-[220px] w-[220px] rounded-full bg-[#6c2cff]/10 blur-3xl"
-          animate={prefersReducedMotion ? undefined : { x: [0, 16, 0], y: [0, -8, 0], opacity: [0.55, 0.82, 0.55] }}
-          transition={{ duration: 9.6, repeat: Infinity, ease: 'easeInOut' }}
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { x: [0, 16, 0], y: [0, -8, 0], opacity: [0.55, 0.82, 0.55] }
+          }
+          transition={{ duration: 9.6, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute inset-x-[18%] top-[20%] h-[420px] bg-[radial-gradient(circle,_rgba(180,103,255,0.12)_0%,_rgba(180,103,255,0.05)_28%,_transparent_72%)] blur-3xl"
-          animate={prefersReducedMotion ? undefined : { scale: [0.96, 1.04, 0.96], opacity: [0.45, 0.75, 0.45] }}
-          transition={{ duration: 8.8, repeat: Infinity, ease: 'easeInOut' }}
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { scale: [0.96, 1.04, 0.96], opacity: [0.45, 0.75, 0.45] }
+          }
+          transition={{ duration: 8.8, repeat: Infinity, ease: "easeInOut" }}
         />
 
         <motion.div
           aria-hidden="true"
           className="absolute -top-24 left-[14%] h-[240px] w-px bg-[linear-gradient(180deg,rgba(212,178,255,0)_0%,rgba(212,178,255,0.75)_45%,rgba(212,178,255,0)_100%)] blur-[1px]"
-          animate={prefersReducedMotion ? undefined : { y: [-80, 520], opacity: [0, 0.9, 0] }}
-          transition={{ duration: 6.5, repeat: Infinity, ease: 'linear', delay: 0.2 }}
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { y: [-80, 520], opacity: [0, 0.9, 0] }
+          }
+          transition={{
+            duration: 6.5,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 0.2,
+          }}
         />
         <motion.div
           aria-hidden="true"
           className="absolute -top-32 left-[48%] h-[300px] w-px bg-[linear-gradient(180deg,rgba(180,103,255,0)_0%,rgba(180,103,255,0.8)_50%,rgba(180,103,255,0)_100%)] blur-[1px]"
-          animate={prefersReducedMotion ? undefined : { y: [-120, 560], opacity: [0, 1, 0] }}
-          transition={{ duration: 7.2, repeat: Infinity, ease: 'linear', delay: 1.1 }}
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { y: [-120, 560], opacity: [0, 1, 0] }
+          }
+          transition={{
+            duration: 7.2,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 1.1,
+          }}
         />
         <motion.div
           aria-hidden="true"
           className="absolute -top-20 right-[18%] h-[220px] w-px bg-[linear-gradient(180deg,rgba(223,198,255,0)_0%,rgba(223,198,255,0.72)_42%,rgba(223,198,255,0)_100%)] blur-[1px]"
-          animate={prefersReducedMotion ? undefined : { y: [-60, 500], opacity: [0, 0.85, 0] }}
-          transition={{ duration: 5.8, repeat: Infinity, ease: 'linear', delay: 0.7 }}
+          animate={
+            prefersReducedMotion
+              ? undefined
+              : { y: [-60, 500], opacity: [0, 0.85, 0] }
+          }
+          transition={{
+            duration: 5.8,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 0.7,
+          }}
         />
       </div>
 
       <div className="flex items-center justify-center gap-2 bg-[#f7f3fb] px-4 py-3 text-center text-sm font-semibold text-[#090909] sm:text-base md:text-lg">
         <Clock3 className="text-[#b467ff]" size={18} />
-        <span>Limited scholarship strategy slots open this week. Book early.</span>
+        <span>
+          Limited scholarship strategy slots open this week. Book early.
+        </span>
       </div>
 
       <div className="relative z-[1] mx-auto mt-3 w-full max-w-[1320px] px-4 sm:mt-4 sm:px-5">
@@ -76,9 +121,9 @@ function HeroSection() {
                   ? undefined
                   : {
                       boxShadow: [
-                        '0 0 0 rgba(180,103,255,0)',
-                        '0 0 18px rgba(180,103,255,0.12)',
-                        '0 0 0 rgba(180,103,255,0)',
+                        "0 0 0 rgba(180,103,255,0)",
+                        "0 0 18px rgba(180,103,255,0.12)",
+                        "0 0 0 rgba(180,103,255,0)",
                       ],
                     }
               }
@@ -93,13 +138,25 @@ function HeroSection() {
             <motion.div
               aria-hidden="true"
               className="pointer-events-none absolute left-1/2 top-[12%] h-[150px] w-[72%] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(180,103,255,0.24)_0%,_rgba(180,103,255,0.1)_32%,_transparent_74%)] blur-3xl"
-              animate={prefersReducedMotion ? undefined : { scale: [0.96, 1.05, 0.96], opacity: [0.35, 0.7, 0.35] }}
-              transition={{ duration: 6.4, repeat: Infinity, ease: 'easeInOut' }}
+              animate={
+                prefersReducedMotion
+                  ? undefined
+                  : { scale: [0.96, 1.05, 0.96], opacity: [0.35, 0.7, 0.35] }
+              }
+              transition={{
+                duration: 6.4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
             />
 
             <motion.div
               className="relative mx-auto mb-5 w-full max-w-[1240px] overflow-hidden rounded-[6px] p-px shadow-[0_24px_80px_rgba(0,0,0,0.36)]"
-              initial={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.985, y: 16 }}
+              initial={
+                prefersReducedMotion
+                  ? undefined
+                  : { opacity: 0, scale: 0.985, y: 16 }
+              }
               animate={
                 prefersReducedMotion
                   ? undefined
@@ -125,14 +182,22 @@ function HeroSection() {
                         rotate: 360,
                       }
                 }
-                transition={{ duration: 4.2, repeat: Infinity, ease: 'linear' }}
+                transition={{ duration: 4.2, repeat: Infinity, ease: "linear" }}
               />
 
               <motion.div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-x-[18%] top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(237,217,255,0.95),transparent)]"
-                animate={prefersReducedMotion ? undefined : { opacity: [0.45, 1, 0.45], scaleX: [0.92, 1.04, 0.92] }}
-                transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut' }}
+                animate={
+                  prefersReducedMotion
+                    ? undefined
+                    : { opacity: [0.45, 1, 0.45], scaleX: [0.92, 1.04, 0.92] }
+                }
+                transition={{
+                  duration: 3.8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               />
 
               <div className="relative rounded-[5px] bg-[linear-gradient(180deg,rgba(10,10,14,0.98)_0%,rgba(12,9,18,0.96)_100%)] px-4 py-4 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)] sm:px-6 md:px-8">
@@ -141,8 +206,15 @@ function HeroSection() {
                 <motion.div
                   aria-hidden="true"
                   className="pointer-events-none absolute left-[-12%] top-0 h-full w-[22%] bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent)] blur-md"
-                  animate={prefersReducedMotion ? undefined : { x: ['0%', '560%'] }}
-                  transition={{ duration: 5.4, repeat: Infinity, ease: 'linear', delay: 0.5 }}
+                  animate={
+                    prefersReducedMotion ? undefined : { x: ["0%", "560%"] }
+                  }
+                  transition={{
+                    duration: 5.4,
+                    repeat: Infinity,
+                    ease: "linear",
+                    delay: 0.5,
+                  }}
                 />
                 <div className="pointer-events-none absolute left-5 top-5 h-8 w-8 border-l border-t border-[#d7b9ff66]" />
                 <div className="pointer-events-none absolute right-5 bottom-5 h-8 w-8 border-r border-b border-[#b467ff70]" />
@@ -153,22 +225,39 @@ function HeroSection() {
                     prefersReducedMotion
                       ? undefined
                       : {
-                          x: ['-8%', '8%', '-8%'],
+                          x: ["-8%", "8%", "-8%"],
                           opacity: [0.45, 0.8, 0.45],
                         }
                   }
-                  transition={{ duration: 4.2, repeat: Infinity, ease: 'linear' }}
+                  transition={{
+                    duration: 4.2,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
                 />
                 <motion.div
                   aria-hidden="true"
                   className="pointer-events-none absolute left-1/2 top-1/2 h-[72%] w-[58%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(180,103,255,0.16)_0%,_rgba(180,103,255,0.05)_34%,_transparent_72%)] blur-3xl"
-                  animate={prefersReducedMotion ? undefined : { scale: [0.96, 1.04, 0.96], opacity: [0.45, 0.82, 0.45] }}
-                  transition={{ duration: 6.2, repeat: Infinity, ease: 'easeInOut' }}
+                  animate={
+                    prefersReducedMotion
+                      ? undefined
+                      : {
+                          scale: [0.96, 1.04, 0.96],
+                          opacity: [0.45, 0.82, 0.45],
+                        }
+                  }
+                  transition={{
+                    duration: 6.2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 />
                 <h1 className="relative [font-family:'Outfit',sans-serif] text-[1.9rem] leading-[1.04] font-bold text-white sm:text-[2.3rem] md:text-[2.8rem] lg:text-[3.2rem] xl:text-[3.55rem]">
                   <motion.span
                     className="block whitespace-nowrap"
-                    initial={prefersReducedMotion ? undefined : { opacity: 0, y: 18 }}
+                    initial={
+                      prefersReducedMotion ? undefined : { opacity: 0, y: 18 }
+                    }
                     animate={
                       prefersReducedMotion
                         ? undefined
@@ -176,20 +265,28 @@ function HeroSection() {
                             opacity: 1,
                             y: 0,
                             textShadow: [
-                              '0 0 0 rgba(255,255,255,0)',
-                              '0 0 18px rgba(255,255,255,0.06)',
-                              '0 0 0 rgba(255,255,255,0)',
+                              "0 0 0 rgba(255,255,255,0)",
+                              "0 0 18px rgba(255,255,255,0.06)",
+                              "0 0 0 rgba(255,255,255,0)",
                             ],
                           }
                     }
-                    transition={{ delay: 0.28, duration: 0.95, ease: smoothEase }}
+                    transition={{
+                      delay: 0.28,
+                      duration: 0.95,
+                      ease: smoothEase,
+                    }}
                   >
                     Win admission to top universities with
                   </motion.span>
                   <motion.span
                     className="block"
-                    initial={prefersReducedMotion ? undefined : { opacity: 0, y: 18 }}
-                    animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+                    initial={
+                      prefersReducedMotion ? undefined : { opacity: 0, y: 18 }
+                    }
+                    animate={
+                      prefersReducedMotion ? undefined : { opacity: 1, y: 0 }
+                    }
                     transition={{ delay: 0.42, duration: 1, ease: smoothEase }}
                   >
                     <span className="bg-gradient-to-r from-[#deb8ff] via-[#b467ff] to-[#8d42ff] bg-clip-text text-transparent">
@@ -199,7 +296,6 @@ function HeroSection() {
                 </h1>
               </div>
             </motion.div>
-
           </div>
 
           <div className="mt-9 w-full" id="student-results">
@@ -215,53 +311,29 @@ function HeroSection() {
                         scale: [0.98, 1.02, 0.98],
                       }
                 }
-                transition={{ duration: 10.5, repeat: Infinity, ease: 'easeInOut' }}
+                transition={{
+                  duration: 10.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               />
-              {floatingIcons.map((item, index) => {
-                const Icon = item.icon
-                return (
-                  <motion.div
-                    key={item.label}
-                    className="absolute hidden h-[60px] w-[60px] place-items-center rounded-[18px] border border-white/8 bg-white/5 text-[#b467ff] shadow-[0_14px_30px_rgba(0,0,0,0.22)] backdrop-blur-[12px] md:grid"
-                    style={item.position}
-                    initial={prefersReducedMotion ? undefined : { opacity: 0, y: 22, scale: 0.92 }}
-                    animate={
-                      prefersReducedMotion
-                        ? undefined
-                        : {
-                            opacity: 1,
-                            y: [0, -7, 0],
-                            rotate: [0, index % 2 === 0 ? 2 : -2, 0],
-                            scale: [1, 1.02, 1],
-                          }
-                    }
-                    transition={{
-                      opacity: { delay: 0.56 + index * 0.12, duration: 0.8, ease: smoothEase },
-                      y: { duration: 8.5 + index * 0.6, repeat: Infinity, ease: 'easeInOut' },
-                      rotate: { duration: 9.2 + index * 0.55, repeat: Infinity, ease: 'easeInOut' },
-                      scale: { duration: 8.8 + index * 0.45, repeat: Infinity, ease: 'easeInOut' },
-                    }}
-                    whileHover={
-                      prefersReducedMotion
-                        ? undefined
-                        : {
-                            y: -8,
-                            scale: 1.06,
-                            boxShadow: '0 18px 40px rgba(140,54,255,0.24)',
-                          }
-                    }
-                  >
-                    <Icon size={28} />
-                  </motion.div>
-                )
-              })}
 
               <motion.div
-                className="relative mx-auto max-w-[980px]"
-                initial={prefersReducedMotion ? undefined : { opacity: 0, y: 32, scale: 0.975 }}
-                animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
+                className="relative mx-auto max-w-[980px] isolate"
+                initial={
+                  prefersReducedMotion
+                    ? undefined
+                    : { opacity: 0, y: 32, scale: 0.975 }
+                }
+                animate={
+                  prefersReducedMotion
+                    ? undefined
+                    : { opacity: 1, y: 0, scale: 1 }
+                }
                 transition={{ delay: 0.34, duration: 1.15, ease: smoothEase }}
               >
+                <div className="pointer-events-none absolute inset-x-[6%] top-[8%] bottom-[10%] rounded-[42px] bg-[radial-gradient(circle_at_50%_30%,rgba(180,103,255,0.28)_0%,rgba(132,54,255,0.16)_38%,rgba(13,8,22,0.78)_100%)] blur-xl" />
+                <div className="pointer-events-none absolute inset-x-[12%] bottom-[4%] h-[22%] rounded-full bg-[radial-gradient(circle,_rgba(180,103,255,0.32)_0%,rgba(180,103,255,0.12)_42%,transparent_78%)] blur-3xl" />
                 <motion.div
                   className="absolute top-[-8px] left-1/2 z-[1] -translate-x-1/2 rounded-full bg-gradient-to-r from-[#b467ff] to-[#8c36ff] px-3.5 py-2 text-[0.7rem] font-bold uppercase tracking-[0.04em] text-white sm:text-[0.82rem]"
                   animate={
@@ -270,18 +342,22 @@ function HeroSection() {
                       : {
                           y: [0, -2, 0],
                           boxShadow: [
-                            '0 10px 22px rgba(140,54,255,0.12)',
-                            '0 14px 28px rgba(140,54,255,0.2)',
-                            '0 10px 22px rgba(140,54,255,0.12)',
+                            "0 10px 22px rgba(140,54,255,0.12)",
+                            "0 14px 28px rgba(140,54,255,0.2)",
+                            "0 10px 22px rgba(140,54,255,0.12)",
                           ],
                         }
                   }
-                  transition={{ duration: 8.6, repeat: Infinity, ease: 'easeInOut' }}
+                  transition={{
+                    duration: 8.6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 >
                   Student Results
                 </motion.div>
                 <motion.img
-                  className="w-full object-cover"
+                  className="relative z-[1] w-full object-cover mix-blend-screen"
                   src="/hero.png"
                   alt="GMC student scholarship winners group"
                   animate={
@@ -292,7 +368,11 @@ function HeroSection() {
                           y: [0, -2, 0],
                         }
                   }
-                  transition={{ duration: 11.2, repeat: Infinity, ease: 'easeInOut' }}
+                  transition={{
+                    duration: 11.2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 />
               </motion.div>
             </div>
@@ -300,12 +380,16 @@ function HeroSection() {
             <motion.div
               className="mt-[18px] flex flex-col items-center gap-[18px]"
               initial={prefersReducedMotion ? undefined : { opacity: 0, y: 18 }}
-              whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+              whileInView={
+                prefersReducedMotion ? undefined : { opacity: 1, y: 0 }
+              }
               viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.95, ease: smoothEase }}
             >
               <motion.div
-                initial={prefersReducedMotion ? undefined : { opacity: 0, y: 14 }}
+                initial={
+                  prefersReducedMotion ? undefined : { opacity: 0, y: 14 }
+                }
                 whileInView={
                   prefersReducedMotion
                     ? undefined
@@ -313,9 +397,9 @@ function HeroSection() {
                         opacity: 1,
                         y: 0,
                         boxShadow: [
-                          '0 18px 40px rgba(140,54,255,0.24)',
-                          '0 21px 46px rgba(140,54,255,0.29)',
-                          '0 18px 40px rgba(140,54,255,0.24)',
+                          "0 18px 40px rgba(140,54,255,0.24)",
+                          "0 21px 46px rgba(140,54,255,0.29)",
+                          "0 18px 40px rgba(140,54,255,0.24)",
                         ],
                       }
                 }
@@ -331,7 +415,11 @@ function HeroSection() {
                   opacity: { duration: 0.45, ease: smoothEase },
                   y: { duration: 0.45, ease: smoothEase },
                   boxShadow: { duration: 0.55, ease: smoothEase },
-                  default: { duration: 6.8, repeat: Infinity, ease: 'easeInOut' },
+                  default: {
+                    duration: 6.8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
                 }}
                 className="w-full max-w-[740px]"
               >
@@ -340,14 +428,22 @@ function HeroSection() {
                   to="/program"
                 >
                   <span className="pointer-events-none absolute inset-y-0 left-[-24%] w-[24%] -skew-x-12 bg-white/25 blur-md transition-transform duration-700 group-hover:translate-x-[520%]" />
-                  <span className="relative">Book Consultation Session</span> <ArrowRight className="relative transition-transform duration-300 group-hover:translate-x-1" size={22} />
+                  <span className="relative">Book Consultation Session</span>{" "}
+                  <ArrowRight
+                    className="relative transition-transform duration-300 group-hover:translate-x-1"
+                    size={22}
+                  />
                 </Link>
               </motion.div>
 
               <motion.div
                 className="flex items-center justify-center gap-3 max-md:flex-col"
-                initial={prefersReducedMotion ? undefined : { opacity: 0, y: 14 }}
-                whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+                initial={
+                  prefersReducedMotion ? undefined : { opacity: 0, y: 14 }
+                }
+                whileInView={
+                  prefersReducedMotion ? undefined : { opacity: 1, y: 0 }
+                }
                 viewport={{ once: true, amount: 0.55 }}
                 transition={{ duration: 0.9, ease: smoothEase }}
               >
@@ -362,7 +458,8 @@ function HeroSection() {
                     Trusted by scholarship-focused students
                   </strong>
                   <span className="text-[0.92rem] leading-[1.5] text-[#c9c2d1]">
-                    Profile guidance, document review, and a smarter admission roadmap.
+                    Profile guidance, document review, and a smarter admission
+                    roadmap.
                   </span>
                 </div>
               </motion.div>
@@ -371,7 +468,7 @@ function HeroSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default HeroSection
+export default HeroSection;
