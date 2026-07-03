@@ -813,6 +813,47 @@ img {
   color: #e9d1ff;
 }
 
+.scholarship-slider:hover .scholarship-slider-track {
+  animation-play-state: paused;
+}
+
+.scholarship-slider-track {
+  animation: scholarshipSliderMarquee 34s linear infinite;
+}
+
+.scholarship-slider-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 600ms ease;
+}
+
+.scholarship-slider-card:hover .scholarship-slider-card-inner {
+  transform: rotateY(180deg);
+}
+
+.scholarship-slider-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.scholarship-slider-card-back {
+  transform: rotateY(180deg);
+}
+
+@keyframes scholarshipSliderMarquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-50% - 8px));
+  }
+}
+
 @media (max-width: 1080px) {
   .stats-grid,
   .feature-grid,

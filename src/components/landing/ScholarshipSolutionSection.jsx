@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
-  CheckCheck,
+  BookOpenCheck,
+  BrainCircuit,
+  CalendarClock,
   FileCheck2,
   GraduationCap,
+  Handshake,
   MessageSquareText,
   Sparkles,
   Target,
@@ -11,57 +14,87 @@ import {
 import { Link } from 'react-router-dom'
 import SectionReveal from '../SectionReveal'
 
-const blueprintPoints = [
-  'Match your profile with the right scholarships',
-  'Build a smarter university shortlist',
-  'Strengthen SOPs and core documents',
-]
-
-const supportModes = [
-  'Strong profile, weak strategy',
-  'Starting from zero, need a roadmap',
-]
-
 const workflowCards = [
   {
     icon: GraduationCap,
     title: 'University Match',
-    description: 'Shortlist smarter.',
+    description: 'Shortlist smarter with universities that match your funding chances.',
+    details:
+      'We help you avoid random applications and focus on programs where your profile, budget, and scholarship potential align.',
   },
   {
     icon: MessageSquareText,
     title: 'SOP Storyline',
-    description: 'Tell your story clearly.',
+    description: 'Tell your story clearly so your application reads with purpose.',
+    details:
+      'Shape your motivation, achievements, and career direction into an SOP structure that feels sharper and more convincing.',
   },
   {
     icon: FileCheck2,
     title: 'Document Review',
-    description: 'Catch gaps early.',
+    description: 'Catch weak spots early before they turn into expensive mistakes.',
+    details:
+      'We flag missing proof, weak framing, and presentation gaps across the documents that matter most for scholarship review.',
   },
   {
     icon: Target,
     title: 'Deadline Roadmap',
-    description: 'Know the next move.',
+    description: 'Know the next move with a cleaner timeline and fewer blind spots.',
+    details:
+      'Get a more realistic application order so you know what to prepare first, what to improve next, and when to submit.',
+  },
+  {
+    icon: BrainCircuit,
+    title: 'Profile Strategy',
+    description: 'Strengthen your positioning before you start sending applications.',
+    details:
+      'We identify what makes your profile competitive and what needs improvement so your effort goes into the right upgrades.',
+  },
+  {
+    icon: CalendarClock,
+    title: 'Application Timing',
+    description: 'Move with better timing instead of rushing near deadlines.',
+    details:
+      'Plan your scholarship journey around document readiness, exam timing, shortlist quality, and realistic submission windows.',
+  },
+  {
+    icon: BookOpenCheck,
+    title: 'Scholarship Fit',
+    description: 'Focus on opportunities that make sense for your academic direction.',
+    details:
+      'We help filter out mismatched programs and highlight scholarship routes where your background has a stronger case.',
+  },
+  {
+    icon: Handshake,
+    title: 'Consultation Clarity',
+    description: 'Leave the session knowing exactly what to do next.',
+    details:
+      'You walk away with clearer priorities, fewer distractions, and a more confident plan for applications and funding.',
   },
 ]
 
 function ScholarshipSolutionSection() {
+  const sliderCards = [...workflowCards, ...workflowCards]
+
   return (
     <section
-      className="relative mt-6 bg-[#f8f6fb] py-12 text-[#09090b] sm:mt-8 sm:py-14"
+      className="relative mt-6 overflow-hidden bg-[linear-gradient(180deg,#f7f3fb_0%,#f3eef9_52%,#efe8f8_100%)] py-10 text-[#09090b] sm:mt-8 sm:py-12 lg:min-h-screen lg:py-8"
       id="why-session-matters"
     >
-      <div className="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-[#0b0910] to-transparent" />
-      <div className="mx-auto w-full max-w-[1320px] px-4 sm:px-5">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-[#0b0910] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-[-10%] w-[28%] bg-[radial-gradient(circle_at_center,rgba(180,103,255,0.16)_0%,rgba(180,103,255,0.06)_42%,transparent_76%)] blur-3xl" />
+      <div className="pointer-events-none absolute inset-y-0 right-[-8%] w-[30%] bg-[radial-gradient(circle_at_center,rgba(143,67,255,0.14)_0%,rgba(143,67,255,0.05)_40%,transparent_76%)] blur-3xl" />
+      <div className="pointer-events-none absolute inset-x-[24%] top-[10%] h-[220px] bg-[radial-gradient(circle,rgba(255,255,255,0.85)_0%,rgba(255,255,255,0.35)_38%,transparent_78%)] blur-3xl" />
+      <div className="relative mx-auto flex w-full max-w-[1320px] items-center px-4 sm:px-5 lg:min-h-screen">
+        <div className="w-full">
         <SectionReveal className="mx-auto max-w-[720px] text-center">
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#cfa5ff] bg-white px-3 py-1.5 text-[11px] font-semibold text-[#8d41ef] shadow-[0_10px_24px_rgba(180,103,255,0.08)] sm:text-xs">
             <Sparkles size={16} />
             A smarter path for ambitious scholarship applicants
           </p>
-          <h2 className="mx-auto max-w-[760px] [font-family:'Outfit',sans-serif] text-[1.75rem] leading-[1.05] font-bold text-[#0d0b12] sm:text-[2.35rem] md:text-[2.9rem]">
-            Stop guessing your scholarship path.
-            <span className="block bg-gradient-to-r from-[#b467ff] to-[#8c36ff] bg-clip-text text-transparent">
-              Get a winning plan built around your profile.
+          <h2 className="mx-auto max-w-[980px] [font-family:'Outfit',sans-serif] text-[1.35rem] leading-[1.08] font-bold text-[#0d0b12] sm:text-[1.75rem] md:text-[2.05rem]">
+            <span className="bg-gradient-to-r from-[#1b1722] to-[#8c36ff] bg-clip-text text-transparent">
+              Stop guessing and build a winning scholarship plan around your profile.
             </span>
           </h2>
           <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5 text-[11px] font-semibold text-[#5d526c] sm:text-xs">
@@ -77,124 +110,66 @@ function ScholarshipSolutionSection() {
           </div>
         </SectionReveal>
 
-        <div className="mt-8 grid gap-5 lg:grid-cols-2 lg:items-stretch">
-          <SectionReveal className="flex h-full flex-col rounded-[28px] border border-white/10 bg-[#120f19] p-5 shadow-[0_16px_50px_rgba(29,18,45,0.18)] sm:p-6">
-            <div className="mb-4 inline-flex rounded-full bg-[#b467ff]/14 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-[#d8beff] sm:text-xs">
-              What You Need
-            </div>
-            <h3 className="[font-family:'Outfit',sans-serif] text-[1.45rem] leading-[1.1] font-semibold text-white sm:text-[1.9rem]">
-              A focused scholarship plan with expert feedback.
-            </h3>
+        <SectionReveal className="mt-6">
+          <div className="scholarship-slider relative overflow-hidden py-1">
+              <div className="pointer-events-none absolute inset-y-0 left-0 z-[2] w-12 bg-[linear-gradient(90deg,#f3eef9_0%,rgba(243,238,249,0)_100%)] sm:w-20" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 z-[2] w-12 bg-[linear-gradient(270deg,#f1ebf8_0%,rgba(241,235,248,0)_100%)] sm:w-20" />
+              <div className="scholarship-slider-track flex w-max gap-4">
+                {sliderCards.map((card, index) => {
+                  const Icon = card.icon
 
-            <div className="mt-5 grid gap-3">
-              {blueprintPoints.map((point) => (
-                <div
-                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-3.5 py-3"
-                  key={point}
-                >
-                  <div className="mt-0.5 inline-grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#15c466] text-white">
-                    <CheckCheck size={14} />
-                  </div>
-                  <p className="text-sm font-medium leading-5 text-white/84 sm:text-[15px]">{point}</p>
-                </div>
-              ))}
-            </div>
+                  return (
+                    <article
+                      className="scholarship-slider-card h-[250px] w-[250px] shrink-0 [perspective:1400px] sm:h-[270px] sm:w-[280px]"
+                      key={`${card.title}-${index}`}
+                    >
+                      <div className="scholarship-slider-card-inner relative h-full w-full">
+                        <div className="scholarship-slider-card-face scholarship-slider-card-front rounded-[26px] bg-[linear-gradient(180deg,#37204f_0%,#261736_100%)] p-5 shadow-[0_18px_36px_rgba(28,13,48,0.22),inset_0_1px_0_rgba(255,255,255,0.05)]">
+                          <div className="mb-4 inline-grid h-12 w-12 place-items-center rounded-2xl bg-[#b467ff]/16 text-[#dfc1ff]">
+                            <Icon size={20} />
+                          </div>
+                          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.12em] text-[#d4b6ff]">
+                            Step {((index % workflowCards.length) + 1).toString().padStart(2, '0')}
+                          </p>
+                          <h3 className="[font-family:'Outfit',sans-serif] text-[1.35rem] leading-[1.05] font-semibold text-white">
+                            {card.title}
+                          </h3>
+                          <p className="mt-3 text-sm leading-6 text-white/72">
+                            {card.description}
+                          </p>
+                        </div>
 
-            <div className="mt-5 rounded-[22px] border border-white/10 bg-[#0d0b13] p-4 text-white sm:p-5">
-              <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#cfb1ff] sm:text-xs">
-                Best for
-              </p>
-              <div className="mt-3 grid gap-2.5">
-                {supportModes.map((item) => (
-                  <div
-                    className="rounded-2xl border border-white/10 bg-white/5 px-3.5 py-3 text-sm leading-5 text-white/90"
-                    key={item}
-                  >
-                    {item}
-                  </div>
-                ))}
+                        <div className="scholarship-slider-card-face scholarship-slider-card-back rounded-[26px] bg-[linear-gradient(145deg,#6f35c7_0%,#4b2490_50%,#341761_100%)] p-5 text-white shadow-[0_18px_36px_rgba(44,16,82,0.24)]">
+                          <div className="mb-4 inline-grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-[#f1deff]">
+                            <Icon size={20} />
+                          </div>
+                          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.12em] text-[#f1deff]">
+                            More insight
+                          </p>
+                          <h3 className="[font-family:'Outfit',sans-serif] text-[1.2rem] leading-[1.08] font-semibold">
+                            {card.title}
+                          </h3>
+                          <p className="mt-3 text-sm leading-6 text-white/84">
+                            {card.details}
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                  )
+                })}
               </div>
+          </div>
+        </SectionReveal>
 
-              <Link
-                className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.08em] text-[#d7bbff] transition hover:text-white sm:text-sm"
-                to="/program"
-              >
-                See the process <ArrowRight size={16} />
-              </Link>
-            </div>
-
-          </SectionReveal>
-
-          <SectionReveal className="relative h-full overflow-hidden rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_top,_rgba(180,103,255,0.16),_transparent_28%),linear-gradient(180deg,_#120f19_0%,_#0d0b13_100%)] p-5 shadow-[0_16px_50px_rgba(29,18,45,0.18)] sm:p-6">
-            <div className="absolute right-[-30px] top-[-20px] h-32 w-32 rounded-full bg-[#c792ff]/30 blur-3xl" />
-            <div className="absolute bottom-0 left-[-20px] h-28 w-28 rounded-full bg-[#8ec5ff]/15 blur-3xl" />
-
-            <div className="mb-5 flex flex-wrap items-center gap-2">
-              <div className="rounded-full bg-white/10 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-white sm:text-xs">
-                Process View
-              </div>
-              <div className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[11px] font-semibold text-[#d4b6ff] sm:text-xs">
-                Scholarship workflow
-              </div>
-            </div>
-
-            <div className="grid gap-3 md:grid-cols-2">
-              {workflowCards.map((card, index) => {
-                const Icon = card.icon
-
-                return (
-                  <motion.article
-                    key={card.title}
-                    className="relative rounded-[24px] border border-white/10 bg-white/[0.05] p-4 shadow-[0_14px_30px_rgba(27,16,45,0.16)] backdrop-blur-md"
-                    initial={{ opacity: 0, y: 32 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{
-                      duration: 0.55,
-                      delay: 0.08 * index,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    whileHover={{ y: -6 }}
-                  >
-                    <div className="mb-3 inline-grid h-10 w-10 place-items-center rounded-2xl bg-[#b467ff]/14 text-[#d7bbff]">
-                      <Icon size={18} />
-                    </div>
-                    <h4 className="[font-family:'Outfit',sans-serif] text-lg font-semibold text-white">
-                      {card.title}
-                    </h4>
-                    <p className="mt-1.5 text-sm leading-5 text-white/68">
-                      {card.description}
-                    </p>
-                  </motion.article>
-                )
-              })}
-
-              <motion.div
-                className="rounded-[24px] border border-[#dbc5f7] bg-[#16111f] px-5 py-5 text-white shadow-[0_16px_34px_rgba(20,10,34,0.14)] md:col-span-2"
-                initial={{ opacity: 0, scale: 0.96 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.55, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#d4b6ff] sm:text-xs">
-                  Why GMC
-                </p>
-                <p className="mt-2 [font-family:'Outfit',sans-serif] text-xl font-semibold leading-tight sm:text-2xl">
-                  Strategy first. Confidence throughout.
-                </p>
-              </motion.div>
-            </div>
-          </SectionReveal>
-        </div>
-
-        <SectionReveal className="mt-5 flex justify-center">
+        <SectionReveal className="mt-4 flex justify-center lg:mt-3">
           <Link
-            className="btn-primary-site min-h-[70px] w-full max-w-[620px] rounded-[24px] px-5 text-center [font-family:'Outfit',sans-serif] text-base font-semibold uppercase sm:min-h-[82px] sm:text-[1.15rem]"
+            className="btn-primary-site min-h-[62px] w-full max-w-[620px] rounded-[24px] px-5 text-center [font-family:'Outfit',sans-serif] text-base font-semibold uppercase sm:min-h-[72px] sm:text-[1.05rem]"
             to="/program"
           >
             Book Your Consultation <ArrowRight size={18} />
           </Link>
         </SectionReveal>
+        </div>
       </div>
     </section>
   )
