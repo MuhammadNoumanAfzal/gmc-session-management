@@ -108,12 +108,12 @@ function ProgramPage() {
             </SectionReveal>
 
             {/* Step Progress Tracker bar */}
-            <div className="mt-4 mx-auto max-w-[580px] px-4">
+            <div className="mt-4 mx-auto max-w-[580px] px-5 py-3 rounded-[22px] border border-white/[0.06] bg-[#0d0919]/60 backdrop-blur-md shadow-[0_12px_32px_rgba(0,0,0,0.2)]">
               <div className="relative flex items-center justify-between">
                 {/* Connecting track line */}
-                <div className="absolute left-0 top-[14px] h-[3px] w-full -translate-y-1/2 bg-white/10 z-0 rounded-full" />
+                <div className="absolute left-0 top-[15px] h-[3px] w-full -translate-y-1/2 bg-white/10 z-0 rounded-full" />
                 <motion.div 
-                  className="absolute left-0 top-[14px] h-[3px] bg-gradient-to-r from-[#b467ff] to-[#8c36ff] z-0 rounded-full"
+                  className="absolute left-0 top-[15px] h-[3px] bg-gradient-to-r from-[#b467ff] to-[#8c36ff] z-0 rounded-full"
                   initial={{ width: '0%' }}
                   animate={{ width: currentStep === 1 ? '0%' : currentStep === 2 ? '50%' : '100%' }}
                   transition={{ duration: 0.35, ease: 'easeInOut' }}
