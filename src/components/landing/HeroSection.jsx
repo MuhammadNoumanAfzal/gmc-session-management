@@ -569,10 +569,9 @@ function HeroSection() {
                 className="w-full max-w-[740px]"
               >
                 <Link
-                  className="group relative inline-flex min-h-[76px] w-full items-center justify-between overflow-hidden rounded-[24px] border border-[#b7fff14a] bg-[linear-gradient(135deg,#16716b_0%,#1f8f8a_48%,#3bc5bc_100%)] px-5 py-4 text-left shadow-[0_10px_22px_rgba(8,60,58,0.14),inset_0_1px_0_rgba(255,255,255,0.14)] transition duration-300 hover:-translate-y-1 hover:border-[#ddfffb80] hover:shadow-[0_14px_28px_rgba(9,78,76,0.18),inset_0_1px_0_rgba(255,255,255,0.18)] sm:min-h-[88px] sm:px-6"
+                  className="btn-primary-site min-h-[76px] w-full justify-between rounded-[24px] px-5 py-4 text-left sm:min-h-[88px] sm:px-6"
                   to="/program"
                 >
-               
                   <span className="relative flex min-w-0 flex-col pr-4">
                     <span className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.26em] text-[#d9fffb] sm:text-[0.72rem]">
                       Start Here

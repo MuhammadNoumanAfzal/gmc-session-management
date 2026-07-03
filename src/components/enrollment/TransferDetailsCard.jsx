@@ -36,7 +36,7 @@ function TransferDetailsCard({ copiedField, onCopy }) {
 
       <div className="mt-4 flex flex-wrap gap-3">
         <a
-          className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#cb84ff] via-[#b467ff] to-[#8c36ff] px-4 text-[12px] font-extrabold uppercase tracking-[0.04em] text-white shadow-[0_14px_28px_rgba(140,54,255,0.16)] transition hover:-translate-y-0.5"
+          className="btn-primary-site h-10 rounded-full px-4 text-[12px] font-extrabold uppercase tracking-[0.04em]"
           href="#payment-proof-form"
         >
           Go to payment form
@@ -83,7 +83,7 @@ function TransferDetailsCard({ copiedField, onCopy }) {
                 </p>
               </div>
               <button
-                className="inline-flex h-9 items-center justify-center gap-2 self-start rounded-full border border-[#dcc5fb] bg-white px-3.5 text-[11px] font-bold uppercase tracking-[0.06em] text-[#7e35ea] transition hover:border-[#b467ff] hover:text-[#5d20c5]"
+                className="btn-secondary-light h-9 self-start rounded-full px-3.5 text-[11px] font-bold uppercase tracking-[0.06em]"
                 onClick={() => onCopy(item.label, item.value)}
                 type="button"
               >

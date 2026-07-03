@@ -189,7 +189,7 @@ function ScholarshipSolutionSection() {
 
         <SectionReveal className="mt-5 flex justify-center">
           <Link
-            className="inline-flex min-h-[70px] w-full max-w-[620px] items-center justify-center gap-3 rounded-none bg-gradient-to-r from-[#bb72ff] to-[#9a4df8] px-5 text-center [font-family:'Outfit',sans-serif] text-base font-semibold uppercase text-white shadow-[0_18px_40px_rgba(140,54,255,0.25)] transition hover:-translate-y-0.5 sm:min-h-[82px] sm:text-[1.15rem]"
+            className="btn-primary-site min-h-[70px] w-full max-w-[620px] rounded-[24px] px-5 text-center [font-family:'Outfit',sans-serif] text-base font-semibold uppercase sm:min-h-[82px] sm:text-[1.15rem]"
             to="/program"
           >
             Book Your Consultation <ArrowRight size={18} />

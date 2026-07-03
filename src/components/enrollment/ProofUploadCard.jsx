@@ -92,7 +92,7 @@ function ProofUploadCard({ fileName, onFileChange }) {
           </p>
           <div className="flex flex-wrap gap-3">
             <a
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-full border border-[#d6bbfb] bg-white px-4 text-sm font-bold text-[#7c32e6] transition hover:border-[#b467ff] hover:text-[#5d20c5]"
+              className="btn-secondary-light h-10 rounded-full px-4 text-sm font-bold"
               href="https://wa.me/"
               rel="noreferrer"
               target="_blank"
@@ -101,7 +101,7 @@ function ProofUploadCard({ fileName, onFileChange }) {
               WhatsApp Support
             </a>
             <button
-              className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#cb84ff] via-[#b467ff] to-[#8c36ff] px-5 text-sm font-extrabold uppercase tracking-[0.04em] text-white shadow-[0_14px_28px_rgba(140,54,255,0.18)] transition hover:-translate-y-0.5"
+              className="btn-primary-site h-10 rounded-full px-5 text-sm font-extrabold uppercase tracking-[0.04em]"
               type="button"
             >
               Submit Proof

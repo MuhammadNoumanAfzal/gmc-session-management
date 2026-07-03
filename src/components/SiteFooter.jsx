@@ -43,14 +43,14 @@ function SiteFooter({ compact = false }) {
 
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#cb84ff] via-[#b467ff] to-[#8c36ff] px-5 text-sm font-semibold uppercase tracking-[0.04em] text-white shadow-[0_16px_34px_rgba(140,54,255,0.18)] transition hover:-translate-y-0.5"
+                className="btn-primary-site h-12 rounded-full px-5 text-sm font-semibold uppercase tracking-[0.04em]"
                 to="/program"
               >
                 Book Consultation
                 <ArrowUpRight size={16} />
               </Link>
               <a
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-5 text-sm font-bold text-white transition hover:border-[#b467ff]/50 hover:bg-white/[0.06]"
+                className="btn-secondary-site h-12 rounded-full px-5 text-sm font-bold"
                 href="https://wa.me/"
                 rel="noreferrer"
                 target="_blank"
@@ -86,7 +86,7 @@ function SiteFooter({ compact = false }) {
             </p>
             <div className="mt-4 grid gap-3">
               <a
-                className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-semibold text-white/82"
+                className="btn-secondary-site justify-start gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-white/82"
                 href="https://wa.me/"
                 rel="noreferrer"
                 target="_blank"

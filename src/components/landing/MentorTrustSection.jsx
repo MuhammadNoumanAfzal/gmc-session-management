@@ -67,7 +67,7 @@ function MentorTrustSection() {
             transition={{ duration: 0.9, delay: 0.08, ease: smoothEase }}
           >
             <Link
-              className="inline-flex min-h-[68px] items-center justify-center gap-3 rounded-none bg-gradient-to-r from-[#bb72ff] to-[#9a4df8] px-6 text-center [font-family:'Outfit',sans-serif] text-sm font-semibold uppercase text-white shadow-[0_18px_40px_rgba(140,54,255,0.25)] transition hover:-translate-y-0.5 sm:min-h-[78px] sm:text-base"
+              className="btn-primary-site min-h-[68px] rounded-[22px] px-6 text-center [font-family:'Outfit',sans-serif] text-sm font-semibold uppercase sm:min-h-[78px] sm:text-base"
               to="/program"
             >
               Book a Consultation <ArrowRight size={18} />

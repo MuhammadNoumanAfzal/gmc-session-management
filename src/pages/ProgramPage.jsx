@@ -46,7 +46,7 @@ function ProgramPage() {
                   </h1>
                 </div>
                 <Link
-                  className="inline-flex h-10 items-center justify-center gap-2 self-start rounded-full border border-white/12 bg-white/[0.04] px-4 text-[13px] font-bold text-white transition hover:border-[#b467ff]/50 hover:bg-white/[0.06]"
+                  className="btn-secondary-site inline-flex h-10 self-start rounded-full px-4 text-[13px] font-bold"
                   to="/"
                 >
                   <ArrowLeft size={18} />
