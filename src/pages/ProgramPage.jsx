@@ -108,7 +108,7 @@ function ProgramPage() {
             </SectionReveal>
 
             {/* Step Progress Tracker bar */}
-            <div className="mt-6.5 mx-auto max-w-[580px] px-4">
+            <div className="mt-4 mx-auto max-w-[580px] px-4">
               <div className="relative flex items-center justify-between">
                 {/* Connecting track line */}
                 <div className="absolute left-0 top-[14px] h-[3px] w-full -translate-y-1/2 bg-white/10 z-0 rounded-full" />
@@ -158,7 +158,7 @@ function ProgramPage() {
             </div>
 
             {/* Step Content Card Container (uncluttered single progressive layout) */}
-            <div className="mt-6 mx-auto max-w-[580px] px-2 min-h-[500px]">
+            <div className="mt-4 mx-auto max-w-[580px] px-2 min-h-[380px]">
               <AnimatePresence mode="wait">
                 {currentStep === 1 && (
                   <motion.div
@@ -208,7 +208,7 @@ function ProgramPage() {
             </div>
 
             {/* Compact footer overlay */}
-            <div className="relative left-1/2 mt-10 w-screen -translate-x-1/2">
+            <div className="relative left-1/2 mt-7 w-screen -translate-x-1/2">
               <SiteFooter compact />
             </div>
           </div>
