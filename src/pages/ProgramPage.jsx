@@ -207,10 +207,10 @@ function ProgramPage() {
               </AnimatePresence>
             </div>
 
-            {/* Compact footer overlay */}
-            <div className="relative left-1/2 mt-7 w-screen -translate-x-1/2">
-              <SiteFooter compact />
-            </div>
+             {/* Footer overlay */}
+             <div className="relative left-1/2 mt-7 w-screen -translate-x-1/2">
+               <SiteFooter />
+             </div>
           </div>
         </section>
       </PageTransition>
