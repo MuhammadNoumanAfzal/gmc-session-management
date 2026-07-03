@@ -48,31 +48,71 @@ function HeroSection() {
             </motion.div>
 
             <motion.div
-              className="mx-auto mb-5 max-w-[1240px] rounded-[6px] border border-white/75 bg-white/[0.02] px-4 py-4 shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_24px_80px_rgba(0,0,0,0.36)] sm:px-6 md:px-8"
+              className="relative mx-auto mb-5 w-full max-w-[1240px] overflow-hidden rounded-[6px] p-px shadow-[0_24px_80px_rgba(0,0,0,0.36)]"
               initial={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.985, y: 16 }}
-              animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.18, duration: 1.15, ease: smoothEase }}
+              animate={
+                prefersReducedMotion
+                  ? undefined
+                  : {
+                      opacity: 1,
+                      scale: 1,
+                      y: 0,
+                    }
+              }
+              transition={{
+                opacity: { delay: 0.18, duration: 1.15, ease: smoothEase },
+                scale: { delay: 0.18, duration: 1.15, ease: smoothEase },
+                y: { delay: 0.18, duration: 1.15, ease: smoothEase },
+              }}
             >
-              <h1 className="[font-family:'Outfit',sans-serif] text-[1.9rem] leading-[1.08] font-bold text-white sm:text-[2.3rem] md:text-[2.8rem] lg:text-[3.2rem] xl:text-[3.55rem]">
-                <motion.span
-                  className="block whitespace-nowrap"
-                  initial={prefersReducedMotion ? undefined : { opacity: 0, y: 18 }}
-                  animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-                  transition={{ delay: 0.28, duration: 0.95, ease: smoothEase }}
-                >
-                  Win admission to top universities with
-                </motion.span>
-                <motion.span
-                  className="block"
-                  initial={prefersReducedMotion ? undefined : { opacity: 0, y: 18 }}
-                  animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-                  transition={{ delay: 0.42, duration: 1, ease: smoothEase }}
-                >
-                  <span className="bg-gradient-to-r from-[#c27dff] via-[#b467ff] to-[#9d4dff] bg-clip-text text-transparent">
-                    fully funded scholarship guidance
-                  </span>
-                </motion.span>
-              </h1>
+              <motion.div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 rounded-[inherit] [background:conic-gradient(from_0deg,_rgba(148,63,255,0.15),_rgba(208,170,255,1),_rgba(111,29,255,0.22),_rgba(208,170,255,0.95),_rgba(148,63,255,0.15))]"
+                animate={
+                  prefersReducedMotion
+                    ? undefined
+                    : {
+                        rotate: 360,
+                      }
+                }
+                transition={{ duration: 4.2, repeat: Infinity, ease: 'linear' }}
+              />
+
+              <div className="relative rounded-[5px] bg-[#09090d]/96 px-4 py-4 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)] sm:px-6 md:px-8">
+                <motion.div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-[10%] -bottom-8 h-10 rounded-full bg-[#b467ff]/30 blur-2xl"
+                  animate={
+                    prefersReducedMotion
+                      ? undefined
+                      : {
+                          x: ['-8%', '8%', '-8%'],
+                          opacity: [0.45, 0.8, 0.45],
+                        }
+                  }
+                  transition={{ duration: 4.2, repeat: Infinity, ease: 'linear' }}
+                />
+                <h1 className="[font-family:'Outfit',sans-serif] text-[1.9rem] leading-[1.08] font-bold text-white sm:text-[2.3rem] md:text-[2.8rem] lg:text-[3.2rem] xl:text-[3.55rem]">
+                  <motion.span
+                    className="block whitespace-nowrap"
+                    initial={prefersReducedMotion ? undefined : { opacity: 0, y: 18 }}
+                    animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+                    transition={{ delay: 0.28, duration: 0.95, ease: smoothEase }}
+                  >
+                    Win admission to top universities with
+                  </motion.span>
+                  <motion.span
+                    className="block"
+                    initial={prefersReducedMotion ? undefined : { opacity: 0, y: 18 }}
+                    animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+                    transition={{ delay: 0.42, duration: 1, ease: smoothEase }}
+                  >
+                    <span className="bg-gradient-to-r from-[#c27dff] via-[#b467ff] to-[#9d4dff] bg-clip-text text-transparent">
+                      fully funded scholarship guidance
+                    </span>
+                  </motion.span>
+                </h1>
+              </div>
             </motion.div>
 
           </div>
