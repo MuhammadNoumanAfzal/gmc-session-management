@@ -128,7 +128,24 @@ function HeroSection() {
                 transition={{ duration: 4.2, repeat: Infinity, ease: 'linear' }}
               />
 
-              <div className="relative rounded-[5px] bg-[#09090d]/96 px-4 py-4 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)] sm:px-6 md:px-8">
+              <motion.div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-[18%] top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(237,217,255,0.95),transparent)]"
+                animate={prefersReducedMotion ? undefined : { opacity: [0.45, 1, 0.45], scaleX: [0.92, 1.04, 0.92] }}
+                transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut' }}
+              />
+
+              <div className="relative rounded-[5px] bg-[linear-gradient(180deg,rgba(10,10,14,0.98)_0%,rgba(12,9,18,0.96)_100%)] px-4 py-4 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)] sm:px-6 md:px-8">
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.015)_0%,transparent_18%,transparent_82%,rgba(180,103,255,0.045)_100%)]" />
+                <div className="pointer-events-none absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:120px_120px] [mask-image:radial-gradient(circle_at_center,black_45%,transparent_90%)]" />
+                <motion.div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-[-12%] top-0 h-full w-[22%] bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent)] blur-md"
+                  animate={prefersReducedMotion ? undefined : { x: ['0%', '560%'] }}
+                  transition={{ duration: 5.4, repeat: Infinity, ease: 'linear', delay: 0.5 }}
+                />
+                <div className="pointer-events-none absolute left-5 top-5 h-8 w-8 border-l border-t border-[#d7b9ff66]" />
+                <div className="pointer-events-none absolute right-5 bottom-5 h-8 w-8 border-r border-b border-[#b467ff70]" />
                 <motion.div
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-x-[10%] -bottom-8 h-10 rounded-full bg-[#b467ff]/30 blur-2xl"
@@ -142,7 +159,13 @@ function HeroSection() {
                   }
                   transition={{ duration: 4.2, repeat: Infinity, ease: 'linear' }}
                 />
-                <h1 className="[font-family:'Outfit',sans-serif] text-[1.9rem] leading-[1.08] font-bold text-white sm:text-[2.3rem] md:text-[2.8rem] lg:text-[3.2rem] xl:text-[3.55rem]">
+                <motion.div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-1/2 top-1/2 h-[72%] w-[58%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(180,103,255,0.16)_0%,_rgba(180,103,255,0.05)_34%,_transparent_72%)] blur-3xl"
+                  animate={prefersReducedMotion ? undefined : { scale: [0.96, 1.04, 0.96], opacity: [0.45, 0.82, 0.45] }}
+                  transition={{ duration: 6.2, repeat: Infinity, ease: 'easeInOut' }}
+                />
+                <h1 className="relative [font-family:'Outfit',sans-serif] text-[1.9rem] leading-[1.04] font-bold text-white sm:text-[2.3rem] md:text-[2.8rem] lg:text-[3.2rem] xl:text-[3.55rem]">
                   <motion.span
                     className="block whitespace-nowrap"
                     initial={prefersReducedMotion ? undefined : { opacity: 0, y: 18 }}
@@ -169,7 +192,7 @@ function HeroSection() {
                     animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
                     transition={{ delay: 0.42, duration: 1, ease: smoothEase }}
                   >
-                    <span className="bg-gradient-to-r from-[#c27dff] via-[#b467ff] to-[#9d4dff] bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-[#deb8ff] via-[#b467ff] to-[#8d42ff] bg-clip-text text-transparent">
                       fully funded scholarship guidance
                     </span>
                   </motion.span>
