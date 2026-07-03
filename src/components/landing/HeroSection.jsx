@@ -15,13 +15,40 @@ function HeroSection() {
       }
 
   return (
-    <section className="px-0 pt-5 pb-20 md:pb-14">
+    <section className="relative overflow-hidden px-0 pt-5 pb-20 md:pb-14">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-x-0 top-0 h-full bg-[linear-gradient(180deg,#050507_0%,#090611_32%,#080510_70%,#050505_100%)]" />
+        <div className="absolute -top-24 left-[-8%] h-[340px] w-[340px] rounded-full bg-[#8c36ff]/18 blur-3xl" />
+        <div className="absolute top-[12%] right-[-6%] h-[300px] w-[300px] rounded-full bg-[#b467ff]/14 blur-3xl" />
+        <div className="absolute bottom-[12%] left-[12%] h-[220px] w-[220px] rounded-full bg-[#6c2cff]/10 blur-3xl" />
+        <div className="absolute inset-x-[18%] top-[20%] h-[420px] bg-[radial-gradient(circle,_rgba(180,103,255,0.12)_0%,_rgba(180,103,255,0.05)_28%,_transparent_72%)] blur-3xl" />
+
+        <motion.div
+          aria-hidden="true"
+          className="absolute -top-24 left-[14%] h-[240px] w-px bg-[linear-gradient(180deg,rgba(212,178,255,0)_0%,rgba(212,178,255,0.75)_45%,rgba(212,178,255,0)_100%)] blur-[1px]"
+          animate={prefersReducedMotion ? undefined : { y: [-80, 520], opacity: [0, 0.9, 0] }}
+          transition={{ duration: 6.5, repeat: Infinity, ease: 'linear', delay: 0.2 }}
+        />
+        <motion.div
+          aria-hidden="true"
+          className="absolute -top-32 left-[48%] h-[300px] w-px bg-[linear-gradient(180deg,rgba(180,103,255,0)_0%,rgba(180,103,255,0.8)_50%,rgba(180,103,255,0)_100%)] blur-[1px]"
+          animate={prefersReducedMotion ? undefined : { y: [-120, 560], opacity: [0, 1, 0] }}
+          transition={{ duration: 7.2, repeat: Infinity, ease: 'linear', delay: 1.1 }}
+        />
+        <motion.div
+          aria-hidden="true"
+          className="absolute -top-20 right-[18%] h-[220px] w-px bg-[linear-gradient(180deg,rgba(223,198,255,0)_0%,rgba(223,198,255,0.72)_42%,rgba(223,198,255,0)_100%)] blur-[1px]"
+          animate={prefersReducedMotion ? undefined : { y: [-60, 500], opacity: [0, 0.85, 0] }}
+          transition={{ duration: 5.8, repeat: Infinity, ease: 'linear', delay: 0.7 }}
+        />
+      </div>
+
       <div className="flex items-center justify-center gap-2 bg-[#f7f3fb] px-4 py-3 text-center text-sm font-semibold text-[#090909] sm:text-base md:text-lg">
         <Clock3 className="text-[#b467ff]" size={18} />
         <span>Limited scholarship strategy slots open this week. Book early.</span>
       </div>
 
-      <div className="mx-auto mt-3 w-full max-w-[1320px] px-4 sm:mt-4 sm:px-5">
+      <div className="relative z-[1] mx-auto mt-3 w-full max-w-[1320px] px-4 sm:mt-4 sm:px-5">
         <div className="flex flex-col items-center">
           <div className="w-full max-w-[1240px] text-center">
             <motion.div
