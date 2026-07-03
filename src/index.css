@@ -840,6 +840,35 @@ img {
   -webkit-backface-visibility: hidden;
 }
 
+.scholarship-card-border-motion {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  pointer-events: none;
+  background:
+    conic-gradient(
+      from 0deg,
+      rgba(180, 103, 255, 0) 0deg,
+      rgba(180, 103, 255, 0.88) 58deg,
+      rgba(244, 224, 255, 0.92) 108deg,
+      rgba(140, 54, 255, 0.85) 176deg,
+      rgba(180, 103, 255, 0.08) 236deg,
+      rgba(180, 103, 255, 0) 360deg
+    );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: scholarshipCardBorderOrbit 4.2s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(180, 103, 255, 0.28));
+  opacity: 0.95;
+}
+
 .scholarship-slider-card-back {
   transform: rotateY(180deg);
 }
@@ -851,6 +880,16 @@ img {
 
   100% {
     transform: translateX(calc(-50% - 8px));
+  }
+}
+
+@keyframes scholarshipCardBorderOrbit {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
 
