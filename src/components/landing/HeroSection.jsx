@@ -1,6 +1,6 @@
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, Clock3, Star } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { floatingIcons } from "../../data/masterclass";
 
@@ -22,6 +22,40 @@ const titleMessages = [
 function HeroSection() {
   const prefersReducedMotion = useReducedMotion();
   const [activeTitleIndex, setActiveTitleIndex] = useState(0);
+  
+  const heroRef = useRef(null);
+  const [titleSpotlight, setTitleSpotlight] = useState({ x: 0, y: 0 });
+  const [isTitleHovered, setIsTitleHovered] = useState(false);
+
+  // Smooth mouse-following parallax motion variables
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springX = useSpring(mouseX, { damping: 28, stiffness: 150 });
+  const springY = useSpring(mouseY, { damping: 28, stiffness: 150 });
+
+  const handleHeroMouseMove = (e) => {
+    if (prefersReducedMotion) return;
+    
+    // Parallax tracking
+    const { clientX, clientY } = e;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const moveX = (clientX - width / 2) / 24;
+    const moveY = (clientY - height / 2) / 24;
+    
+    mouseX.set(moveX);
+    mouseY.set(moveY);
+
+    // Title spotlight tracking
+    if (heroRef.current) {
+      const rect = heroRef.current.getBoundingClientRect();
+      setTitleSpotlight({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+    }
+  };
 
   const smoothEase = [0.22, 1, 0.36, 1];
   const heroReveal = prefersReducedMotion
@@ -48,44 +82,55 @@ function HeroSection() {
   const activeTitle = titleMessages[activeTitleIndex];
 
   return (
-    <section className="relative overflow-hidden px-0 pt-28 pb-20 md:pt-22 md:pb-14">
-      <div className="pointer-events-none absolute inset-0">
+    <section 
+      ref={heroRef}
+      onMouseMove={handleHeroMouseMove}
+      className="relative overflow-hidden px-0 pt-28 pb-20 md:pt-22 md:pb-14 select-none"
+    >
+      {/* Background elements & moving gradient meshes */}
+      <div className="pointer-events-none absolute inset-0 z-0">
         <div className="absolute inset-x-0 top-0 h-full bg-[linear-gradient(180deg,#050507_0%,#090611_32%,#080510_70%,#050505_100%)]" />
+        
+        {/* Parallax blob 1 */}
         <motion.div
           className="absolute -top-24 left-[-8%] h-[340px] w-[340px] rounded-full bg-[#8c36ff]/18 blur-3xl"
+          style={{ x: springX, y: springY }}
           animate={
             prefersReducedMotion
               ? undefined
-              : { x: [-12, 10, -12], y: [0, 14, 0], scale: [1, 1.08, 1] }
+              : { scale: [1, 1.08, 1] }
           }
           transition={{ duration: 10.2, repeat: Infinity, ease: "easeInOut" }}
         />
+        
+        {/* Parallax blob 2 */}
         <motion.div
           className="absolute top-[12%] right-[-6%] h-[300px] w-[300px] rounded-full bg-[#b467ff]/14 blur-3xl"
+          style={{ 
+            x: useTransform(springX, (val) => val * -1.2), 
+            y: useTransform(springY, (val) => val * -1.2) 
+          }}
           animate={
             prefersReducedMotion
               ? undefined
-              : { x: [10, -12, 10], y: [0, -10, 0], scale: [1.02, 0.95, 1.02] }
+              : { scale: [1.02, 0.95, 1.02] }
           }
           transition={{ duration: 11.4, repeat: Infinity, ease: "easeInOut" }}
         />
+
+        {/* Parallax blob 3 */}
         <motion.div
           className="absolute bottom-[12%] left-[12%] h-[220px] w-[220px] rounded-full bg-[#6c2cff]/10 blur-3xl"
+          style={{ 
+            x: useTransform(springX, (val) => val * 0.8), 
+            y: useTransform(springY, (val) => val * 0.8) 
+          }}
           animate={
             prefersReducedMotion
               ? undefined
-              : { x: [0, 16, 0], y: [0, -8, 0], opacity: [0.55, 0.82, 0.55] }
+              : { opacity: [0.55, 0.82, 0.55] }
           }
           transition={{ duration: 9.6, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute inset-x-[18%] top-[20%] h-[420px] bg-[radial-gradient(circle,_rgba(180,103,255,0.12)_0%,_rgba(180,103,255,0.05)_28%,_transparent_72%)] blur-3xl"
-          animate={
-            prefersReducedMotion
-              ? undefined
-              : { scale: [0.96, 1.04, 0.96], opacity: [0.45, 0.75, 0.45] }
-          }
-          transition={{ duration: 8.8, repeat: Infinity, ease: "easeInOut" }}
         />
 
         <motion.div
@@ -135,6 +180,7 @@ function HeroSection() {
         />
       </div>
 
+
       <div className="flex items-center justify-center gap-2 bg-[#f7f3fb] px-4 py-3 text-center text-sm font-semibold text-[#090909] sm:text-base md:text-lg">
         <Clock3 className="text-[#b467ff]" size={18} />
         <span>
@@ -142,7 +188,7 @@ function HeroSection() {
         </span>
       </div>
 
-      <div className="relative z-[1] mx-auto mt-3 w-full max-w-[1320px] px-4 sm:mt-4 sm:px-5">
+      <div className="relative z-10 mx-auto mt-3 w-full max-w-[1320px] px-4 sm:mt-4 sm:px-5">
         <div className="flex flex-col items-center">
           <div className="w-full max-w-[1240px] text-center">
             <motion.div
@@ -162,29 +208,17 @@ function HeroSection() {
               }
               viewport={{ once: true }}
             >
-              <Star className="shrink-0" size={14} fill="currentColor" />
+              <Star className="shrink-0 text-[#dba8ff] animate-pulse" size={14} fill="currentColor" />
               <span className="leading-tight whitespace-normal">
                 Learn From Students Who Won Fully Funded Scholarships
               </span>
             </motion.div>
 
+            {/* Title spotlight card wrapper */}
             <motion.div
-              aria-hidden="true"
-              className="pointer-events-none absolute left-1/2 top-[12%] h-[150px] w-[72%] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(180,103,255,0.24)_0%,_rgba(180,103,255,0.1)_32%,_transparent_74%)] blur-3xl"
-              animate={
-                prefersReducedMotion
-                  ? undefined
-                  : { scale: [0.96, 1.05, 0.96], opacity: [0.35, 0.7, 0.35] }
-              }
-              transition={{
-                duration: 6.4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-
-            <motion.div
-              className="relative mx-auto mb-5 w-full max-w-[1240px] overflow-hidden rounded-[6px] p-px shadow-[0_24px_80px_rgba(0,0,0,0.36)]"
+              onMouseEnter={() => setIsTitleHovered(true)}
+              onMouseLeave={() => setIsTitleHovered(false)}
+              className="relative mx-auto mb-5 w-full max-w-[1240px] overflow-hidden rounded-[20px] p-px shadow-[0_24px_80px_rgba(0,0,0,0.36)]"
               initial={
                 prefersReducedMotion
                   ? undefined
@@ -205,6 +239,7 @@ function HeroSection() {
                 y: { delay: 0.18, duration: 1.15, ease: smoothEase },
               }}
             >
+              {/* Conic glowing orbit border */}
               <motion.div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 rounded-[inherit] [background:conic-gradient(from_0deg,_rgba(148,63,255,0.15),_rgba(208,170,255,1),_rgba(111,29,255,0.22),_rgba(208,170,255,0.95),_rgba(148,63,255,0.15))]"
@@ -218,214 +253,25 @@ function HeroSection() {
                 transition={{ duration: 4.2, repeat: Infinity, ease: "linear" }}
               />
 
-              <motion.div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-x-[18%] top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(237,217,255,0.95),transparent)]"
-                animate={
-                  prefersReducedMotion
-                    ? undefined
-                    : { opacity: [0.45, 1, 0.45], scaleX: [0.92, 1.04, 0.92] }
-                }
-                transition={{
-                  duration: 3.8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
+              <div className="relative rounded-[20px] bg-[linear-gradient(180deg,rgba(10,10,14,0.98)_0%,rgba(12,9,18,0.96)_100%)] px-4 py-8 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)] sm:px-6 md:px-8">
+                {/* Active Mouse spotlight gradient */}
+                {isTitleHovered && (
+                  <div
+                    className="pointer-events-none absolute inset-0 opacity-40 transition-opacity duration-300 z-0"
+                    style={{
+                      background: `radial-gradient(350px circle at ${titleSpotlight.x}px ${titleSpotlight.y}px, rgba(180, 103, 255, 0.16), transparent 80%)`,
+                    }}
+                  />
+                )}
 
-              <div className="relative rounded-[5px] bg-[linear-gradient(180deg,rgba(10,10,14,0.98)_0%,rgba(12,9,18,0.96)_100%)] px-4 py-4 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)] sm:px-6 md:px-8">
-                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.015)_0%,transparent_18%,transparent_82%,rgba(180,103,255,0.045)_100%)]" />
-                <motion.div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-y-[-12%] left-[-8%] w-[44%] rounded-full bg-[linear-gradient(135deg,rgba(171,98,255,0.16),rgba(171,98,255,0.04),transparent)] blur-3xl"
-                  animate={
-                    prefersReducedMotion
-                      ? undefined
-                      : {
-                          x: ["0%", "18%", "0%"],
-                          rotate: [-4, 2, -4],
-                          opacity: [0.4, 0.75, 0.4],
-                        }
-                  }
-                  transition={{
-                    duration: 8.8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                <motion.div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-y-[-18%] right-[-10%] w-[40%] rounded-full bg-[linear-gradient(225deg,rgba(223,198,255,0.16),rgba(122,54,255,0.04),transparent)] blur-3xl"
-                  animate={
-                    prefersReducedMotion
-                      ? undefined
-                      : {
-                          x: ["0%", "-16%", "0%"],
-                          rotate: [3, -2, 3],
-                          opacity: [0.35, 0.68, 0.35],
-                        }
-                  }
-                  transition={{
-                    duration: 9.4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                <motion.div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute left-[-12%] top-0 h-full w-[22%] bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent)] blur-md"
-                  animate={
-                    prefersReducedMotion ? undefined : { x: ["0%", "560%"] }
-                  }
-                  transition={{
-                    duration: 5.4,
-                    repeat: Infinity,
-                    ease: "linear",
-                    delay: 0.5,
-                  }}
-                />
-                <motion.div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute left-5 top-5 h-8 w-8 border-l border-t border-[#d7b9ff80]"
-                  animate={
-                    prefersReducedMotion
-                      ? undefined
-                      : { opacity: [0.45, 1, 0.45], scale: [1, 1.08, 1] }
-                  }
-                  transition={{
-                    duration: 2.8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                <motion.div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute right-5 bottom-5 h-8 w-8 border-r border-b border-[#b467ff88]"
-                  animate={
-                    prefersReducedMotion
-                      ? undefined
-                      : { opacity: [0.5, 1, 0.5], scale: [1, 1.08, 1] }
-                  }
-                  transition={{
-                    duration: 2.8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 0.7,
-                  }}
-                />
-                <motion.div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute top-5 right-5 h-6 w-6 border-r border-t border-[#ffffff30]"
-                  animate={
-                    prefersReducedMotion
-                      ? undefined
-                      : { opacity: [0.18, 0.65, 0.18] }
-                  }
-                  transition={{
-                    duration: 3.2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                <motion.div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute bottom-5 left-5 h-6 w-6 border-b border-l border-[#ffffff24]"
-                  animate={
-                    prefersReducedMotion
-                      ? undefined
-                      : { opacity: [0.15, 0.55, 0.15] }
-                  }
-                  transition={{
-                    duration: 3.2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 0.9,
-                  }}
-                />
-                <motion.div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-x-[12%] bottom-0 h-px bg-[linear-gradient(90deg,transparent,rgba(180,103,255,0.65),transparent)]"
-                  animate={
-                    prefersReducedMotion
-                      ? undefined
-                      : { scaleX: [0.2, 1, 0.2], opacity: [0.35, 0.95, 0.35] }
-                  }
-                  transition={{
-                    duration: 4.6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                <motion.div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-x-[10%] -bottom-8 h-10 rounded-full bg-[#b467ff]/30 blur-2xl"
-                  animate={
-                    prefersReducedMotion
-                      ? undefined
-                      : {
-                          x: ["-8%", "8%", "-8%"],
-                          opacity: [0.45, 0.8, 0.45],
-                        }
-                  }
-                  transition={{
-                    duration: 4.2,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                />
-                <motion.div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute left-1/2 top-1/2 h-[72%] w-[58%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(180,103,255,0.16)_0%,_rgba(180,103,255,0.05)_34%,_transparent_72%)] blur-3xl"
-                  animate={
-                    prefersReducedMotion
-                      ? undefined
-                      : {
-                          scale: [0.96, 1.04, 0.96],
-                          opacity: [0.45, 0.82, 0.45],
-                        }
-                  }
-                  transition={{
-                    duration: 6.2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                <motion.div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute left-[8%] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-[#e8d1ff] shadow-[0_0_18px_rgba(232,209,255,0.9)]"
-                  animate={
-                    prefersReducedMotion
-                      ? undefined
-                      : { x: ["0%", "820%"], opacity: [0, 1, 1, 0] }
-                  }
-                  transition={{
-                    duration: 3.1,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                />
-                <motion.div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute right-[10%] top-[30%] h-2 w-2 rounded-full bg-[#b467ff] shadow-[0_0_16px_rgba(180,103,255,0.95)]"
-                  animate={
-                    prefersReducedMotion
-                      ? undefined
-                      : { y: [0, 18, 0], x: [0, -10, 0], opacity: [0.35, 1, 0.35] }
-                  }
-                  transition={{
-                    duration: 1.9,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                <h1 className="relative [font-family:'Outfit',sans-serif] text-[1.9rem] leading-[1.04] font-bold text-white sm:text-[2.3rem] md:text-[2.8rem] lg:text-[3.2rem] xl:text-[3.55rem]">
+                <h1 className="relative z-10 [font-family:'Outfit',sans-serif] text-[1.9rem] leading-[1.04] font-bold text-white sm:text-[2.3rem] md:text-[2.8rem] lg:text-[3.2rem] xl:text-[3.55rem]">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeTitleIndex}
                       initial={
                         prefersReducedMotion
                           ? undefined
-                          : { opacity: 0, y: 22, filter: "blur(10px)" }
+                          : { opacity: 0, y: 18, filter: "blur(8px)" }
                       }
                       animate={
                         prefersReducedMotion
@@ -441,10 +287,10 @@ function HeroSection() {
                           ? undefined
                           : { opacity: 0, y: -18, filter: "blur(8px)" }
                       }
-                      transition={{ duration: 0.72, ease: smoothEase }}
+                      transition={{ duration: 0.65, ease: smoothEase }}
                     >
                       <motion.span
-                        className="block whitespace-nowrap"
+                        className="block whitespace-normal sm:whitespace-nowrap"
                         animate={
                           prefersReducedMotion
                             ? undefined
@@ -470,11 +316,12 @@ function HeroSection() {
             </motion.div>
           </div>
 
-          <div className="mt-9 w-full" id="student-results">
+          <div className="mt-9 w-full z-10" id="student-results">
             <div className="relative mx-auto max-w-[1020px] px-2 pt-10 sm:px-5">
               <motion.div
                 aria-hidden="true"
                 className="absolute inset-x-[12%] top-12 h-[58%] rounded-full bg-[radial-gradient(circle,_rgba(180,103,255,0.22)_0%,_rgba(180,103,255,0.08)_34%,_transparent_72%)] blur-3xl"
+                style={{ x: useTransform(springX, (val) => val * -0.5), y: useTransform(springY, (val) => val * -0.5) }}
                 animate={
                   prefersReducedMotion
                     ? undefined
@@ -490,8 +337,10 @@ function HeroSection() {
                 }}
               />
 
+              {/* Parallax Group Image */}
               <motion.div
                 className="relative mx-auto max-w-[980px] isolate"
+                style={{ x: useTransform(springX, (val) => val * 0.4), y: useTransform(springY, (val) => val * 0.4) }}
                 initial={
                   prefersReducedMotion
                     ? undefined
@@ -569,7 +418,7 @@ function HeroSection() {
                 className="w-full max-w-[740px]"
               >
                 <Link
-                  className="btn-primary-site min-h-[76px] w-full justify-between rounded-[24px] px-5 py-4 text-left sm:min-h-[88px] sm:px-6"
+                  className="btn-primary-site min-h-[76px] w-full justify-between rounded-[24px] px-5 py-4 text-left sm:min-h-[88px] sm:px-6 shadow-[0_20px_50px_rgba(31,143,138,0.22)] hover:shadow-[0_22px_60px_rgba(59,197,188,0.48)] transition-all duration-300"
                   to="/program"
                 >
                   <span className="relative flex min-w-0 flex-col pr-4">
