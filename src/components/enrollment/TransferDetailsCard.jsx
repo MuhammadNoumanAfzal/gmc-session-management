@@ -1,113 +1,112 @@
-import { ArrowDownRight, Copy, Landmark, Sparkles } from 'lucide-react'
-import { bankDetails, paymentSteps, pricing, supportNotes } from '../../data/enrollment'
+import { Copy, Landmark, ShieldCheck, Check, ArrowRight } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { bankDetails, supportNotes } from '../../data/enrollment'
 
-function TransferDetailsCard({ copiedField, onCopy }) {
+function TransferDetailsCard({ copiedField, onCopy, onBack, onNext }) {
   return (
-    <section className="rounded-[26px] border border-[#e6d8fb] bg-white p-4 text-[#0d0b12] shadow-[0_20px_56px_rgba(40,18,72,0.07)] sm:p-4.5">
-      <div className="inline-flex items-center gap-2 rounded-full border border-[#d6bbfb] bg-[#f5ecff] px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-[#8c36ff]">
-        <Sparkles size={14} />
-        {pricing.badge}
-      </div>
-
-      <h1 className="mt-3 max-w-[13ch] [font-family:'Sora',sans-serif] text-[1.7rem] leading-[1.02] font-extrabold text-[#0d0b12] sm:text-[2.2rem]">
-        Get enrolled now.
-      </h1>
-
-      <div className="mt-4 overflow-hidden rounded-[24px] border border-[#ddbffd] bg-[linear-gradient(135deg,#17111f_0%,#28173a_48%,#8c36ff_100%)] text-white shadow-[0_18px_34px_rgba(140,54,255,0.13)]">
-        <div className="flex flex-col gap-2.5 px-4 py-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#e6d6ff]">
-              Confirm your slot at
-            </p>
-            <div className="mt-2 flex flex-wrap items-end gap-3">
-              <span className="[font-family:'Sora',sans-serif] text-[2rem] leading-none font-extrabold sm:text-[2.5rem]">
-                {pricing.discountedPrice}
-              </span>
-              <span className="pb-1 text-sm font-semibold text-white/55 line-through sm:text-base">
-                {pricing.originalPrice}
-              </span>
-            </div>
-          </div>
-          <p className="max-w-[14rem] text-[13px] leading-5 text-white/78">
-            Pay the discounted amount first, then upload the screenshot below.
+    <div className="grid gap-3.5">
+      {/* Online Bank Transfer details card */}
+      <div className="overflow-hidden rounded-[26px] border border-white/8 bg-[#100c1a]/95 text-white shadow-[0_24px_56px_rgba(11,7,18,0.3)]">
+        <div className="flex items-center gap-2 bg-gradient-to-r from-[#171224] to-[#0c0817] px-4.5 py-3 border-b border-white/5">
+          <Landmark size={16} className="text-[#b467ff] shadow-[0_0_10px_rgba(180,103,255,0.3)]" />
+          <p className="[font-family:'Outfit',sans-serif] text-sm.5 font-bold tracking-wide">
+            Online Bank Transfer
           </p>
         </div>
-      </div>
 
-      <div className="mt-4 flex flex-wrap gap-3">
-        <a
-          className="btn-primary-site h-10 rounded-full px-4 text-[12px] font-extrabold uppercase tracking-[0.04em]"
-          href="#payment-proof-form"
-        >
-          Go to payment form
-          <ArrowDownRight size={16} />
-        </a>
-      </div>
-
-      <p className="mt-3 max-w-[38rem] text-[0.92rem] leading-6 text-[#5f586d]">
-        {pricing.title}
-      </p>
-
-      <div className="mt-5 grid gap-2.5">
-        {paymentSteps.map((step, index) => (
-          <div
-            className="flex items-start gap-3 rounded-2xl border border-[#eee5fa] bg-[#fbf8ff] px-3.5 py-2.5"
-            key={step}
-          >
-            <div className="inline-grid h-7 w-7 shrink-0 place-items-center rounded-full bg-gradient-to-r from-[#c986ff] to-[#9f53f9] text-xs font-extrabold text-white">
-              {index + 1}
-            </div>
-            <p className="text-sm font-medium leading-5 text-[#1b1626]">{step}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-5 overflow-hidden rounded-[24px] border border-[#e7d7fb]">
-        <div className="flex items-center gap-2 bg-[#0d0b12] px-4 py-3 text-white">
-          <Landmark size={18} className="text-[#c68bff]" />
-          <p className="[font-family:'Sora',sans-serif] text-base font-bold">Online Bank Transfer</p>
-        </div>
-
-        <div className="grid gap-2.5 bg-white px-4 py-4">
+        <div className="grid gap-2 bg-[#120f21] px-4 py-4 border-b border-white/5">
           {bankDetails.map((item) => (
             <div
-              className="flex flex-col gap-2 rounded-2xl border border-[#efe7fb] bg-[#faf7ff] px-3.5 py-2.5 sm:flex-row sm:items-center sm:justify-between"
+              className="flex flex-col gap-1.5 rounded-xl border border-white/5 bg-[#171224]/80 px-3.5 py-3 sm:flex-row sm:items-center sm:justify-between transition-all duration-300 hover:border-white/10"
               key={item.label}
             >
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#8c36ff]">
+                <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-[#b467ff]">
                   {item.label}
                 </p>
-                <p className="mt-1 text-sm font-semibold text-[#18131f] sm:text-[0.9rem]">
+                <p className="mt-0.5 [font-family:'Outfit',sans-serif] text-[0.92rem] font-semibold text-white tracking-wide">
                   {item.value}
                 </p>
               </div>
               <button
-                className="btn-secondary-light h-9 self-start rounded-full px-3.5 text-[11px] font-bold uppercase tracking-[0.06em]"
+                className={`inline-flex items-center gap-1.5 h-8 rounded-full border px-3 text-[10px] font-bold uppercase tracking-[0.06em] transition-all duration-300 ${
+                  copiedField === item.label 
+                    ? 'bg-[#12a150]/20 border-[#12a150]/40 text-[#54eb90]' 
+                    : 'bg-white/[0.04] border-white/10 text-white/90 hover:bg-white/10 hover:text-white'
+                }`}
                 onClick={() => onCopy(item.label, item.value)}
                 type="button"
               >
-                <Copy size={14} />
+                {copiedField === item.label ? <Check size={11} /> : <Copy size={11} />}
                 {copiedField === item.label ? 'Copied' : 'Copy'}
               </button>
             </div>
           ))}
         </div>
+
+        {/* Info label steps header */}
+        <div className="px-4.5 py-3 bg-[#120f21] text-xs text-white/60">
+          Pay the discounted amount of Rs. 4,900 to the account above, copy the details as needed, then proceed.
+        </div>
       </div>
 
-      <div className="mt-5 rounded-[24px] border border-[#eadcfb] bg-[#fbf8ff] px-4 py-4">
-        <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#8c36ff]">
+      {/* Important Notes Card */}
+      <div className="rounded-[26px] border border-white/8 bg-[#100c1a]/95 px-4.5 py-4 text-white shadow-[0_24px_56px_rgba(11,7,18,0.3)]">
+        <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#b467ff]">
           Important notes
         </p>
-        <div className="mt-3 grid gap-2.5">
+        <div className="mt-2.5 grid gap-2">
           {supportNotes.map((note) => (
-            <div className="rounded-2xl border border-[#efe7fb] bg-white px-3.5 py-2.5" key={note}>
-              <p className="text-sm leading-5 text-[#4d4660]">{note}</p>
+            <div 
+              className="rounded-xl border border-white/5 bg-[#171224]/80 px-3.5 py-2.5 transition-all duration-300 hover:border-white/10" 
+              key={note}
+            >
+              <p className="text-[12px] leading-5 text-white">{note}</p>
             </div>
           ))}
         </div>
       </div>
-    </section>
+
+      {/* Manual verification disclaimer card */}
+      <div className="rounded-[22px] border border-white/5 bg-[#120f21]/70 px-4.5 py-3">
+        <div className="flex items-center gap-3">
+          <div className="inline-grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[#b467ff]/12 text-[#d8beff] border border-[#b467ff]/10">
+            <ShieldCheck size={16} />
+          </div>
+          <div>
+            <p className="text-[9.5px] font-bold uppercase tracking-[0.08em] text-[#cfb1ff]">
+              Manual verification
+            </p>
+            <p className="mt-0.5 text-xs text-white/95">
+              Payment proof is reviewed manually before session confirmation.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation button row */}
+      <div className="flex items-center justify-between gap-3 pt-3 border-t border-white/5 mt-1">
+        <motion.button
+          onClick={onBack}
+          className="btn-secondary-site h-10 rounded-full px-5 text-xs font-bold uppercase tracking-[0.06em] border-white/10 bg-white/[0.03] text-white hover:bg-white/10"
+          type="button"
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          Back
+        </motion.button>
+        <motion.button
+          onClick={onNext}
+          className="btn-primary-site inline-flex h-10 items-center gap-2 rounded-full px-6 text-xs font-bold uppercase tracking-[0.06em] shadow-[0_8px_20px_rgba(31,143,138,0.18)]"
+          type="button"
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <span>I've Made the Payment</span>
+          <ArrowRight size={14} className="text-[#d7fffc]" />
+        </motion.button>
+      </div>
+    </div>
   )
 }
 
