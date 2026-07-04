@@ -1,71 +1,8 @@
-import { motion } from 'framer-motion'
-import { Play, Quote } from 'lucide-react'
-import reviewProofImage from '../../assets/review-proof-placeholder.svg'
-import videoProofImage from '../../assets/video-proof-placeholder.svg'
+import ContinuousTrack from '../../features/home/media/ContinuousTrack'
+import ReviewProofCard from '../../features/home/media/ReviewProofCard'
+import VideoProofCard from '../../features/home/media/VideoProofCard'
+import { reviewItems, videoItems } from '../../features/home/media/mediaProofData'
 import SectionReveal from '../SectionReveal'
-
-const videoItems = [
-  {
-    title: 'Student Success Call',
-    subtitle: 'Scholarship roadmap breakdown',
-    image: videoProofImage,
-  },
-  {
-    title: 'Consultation Clip',
-    subtitle: 'Profile review session',
-    image: videoProofImage,
-  },
-  {
-    title: 'Application Strategy',
-    subtitle: 'Shortlisting and planning',
-    image: videoProofImage,
-  },
-  {
-    title: 'Winning SOP Feedback',
-    subtitle: 'Live document guidance',
-    image: videoProofImage,
-  },
-]
-
-const reviewItems = [
-  {
-    title: 'Family success moment',
-    subtitle: 'A real proof image from GMC student results',
-    image: '/family2.jpg',
-  },
-  {
-    title: 'Scholarship celebration',
-    subtitle: 'Another trust-building family result photo',
-    image: '/family3.jpg',
-  },
-  {
-    title: 'Consultation feedback',
-    subtitle: 'Helped organize the full process',
-    image: reviewProofImage,
-  },
-  {
-    title: 'Application support review',
-    subtitle: 'More confidence before deadlines',
-    image: reviewProofImage,
-  },
-]
-
-function ContinuousTrack({ children, duration = 22, direction = 'left' }) {
-  const animationX = direction === 'left' ? ['0%', '-50%'] : ['-50%', '0%']
-
-  return (
-    <div className="overflow-hidden">
-      <motion.div
-        className="flex w-max gap-5"
-        animate={{ x: animationX }}
-        transition={{ duration, ease: 'linear', repeat: Infinity }}
-        style={{ willChange: 'transform' }}
-      >
-        {children}
-      </motion.div>
-    </div>
-  )
-}
 
 function MediaProofSection() {
   const loopedVideos = [...videoItems, ...videoItems]
@@ -91,54 +28,13 @@ function MediaProofSection() {
         <div className="space-y-5">
           <ContinuousTrack duration={24} direction="right">
             {loopedVideos.map((item, index) => (
-              <article
-                className="w-[280px] shrink-0 rounded-[26px] border border-white/10 bg-white/[0.04] p-3 shadow-[0_18px_40px_rgba(0,0,0,0.20)] backdrop-blur-md sm:w-[340px]"
-                key={`${item.title}-${index}`}
-              >
-                <div className="relative overflow-hidden rounded-[20px]">
-                  <img
-                    className="h-[180px] w-full object-cover sm:h-[210px]"
-                    src={item.image}
-                    alt={item.title}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute left-4 top-4 inline-grid h-11 w-11 place-items-center rounded-full bg-white/14 text-white backdrop-blur-md">
-                    <Play size={18} fill="currentColor" />
-                  </div>
-                  <div className="absolute inset-x-4 bottom-4">
-                    <p className="[font-family:'Outfit',sans-serif] text-lg font-semibold text-white">
-                      {item.title}
-                    </p>
-                    <p className="text-sm text-white/72">{item.subtitle}</p>
-                  </div>
-                </div>
-              </article>
+              <VideoProofCard key={`${item.title}-${index}`} {...item} />
             ))}
           </ContinuousTrack>
 
           <ContinuousTrack duration={26} direction="left">
             {loopedReviews.map((item, index) => (
-              <article
-                className="w-[250px] shrink-0 rounded-[24px] border border-white/10 bg-white/[0.04] p-3 shadow-[0_18px_40px_rgba(0,0,0,0.20)] backdrop-blur-md sm:w-[300px]"
-                key={`${item.title}-${index}`}
-              >
-                <div className="relative overflow-hidden rounded-[18px]">
-                  <img
-                    className="h-[180px] w-full object-cover sm:h-[200px]"
-                    src={item.image}
-                    alt={item.title}
-                  />
-                  <div className="absolute left-3 top-3 inline-grid h-9 w-9 place-items-center rounded-full bg-[#b467ff]/18 text-[#eddcff] backdrop-blur-md">
-                    <Quote size={16} />
-                  </div>
-                </div>
-                <div className="px-1 pt-3">
-                  <p className="[font-family:'Outfit',sans-serif] text-base font-semibold text-white">
-                    {item.title}
-                  </p>
-                  <p className="mt-1 text-sm leading-6 text-white/65">{item.subtitle}</p>
-                </div>
-              </article>
+              <ReviewProofCard key={`${item.title}-${index}`} {...item} />
             ))}
           </ContinuousTrack>
         </div>
