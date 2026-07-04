@@ -29,6 +29,7 @@ function ProgramStepPanels({
   onGoToPayment,
   onGoToProof,
   paymentProofForm,
+  submitState,
 }) {
   return (
     <div className="mt-4 mx-auto min-h-[380px] max-w-[580px] px-2">
@@ -59,6 +60,7 @@ function ProgramStepPanels({
               onFieldChange={onFormFieldChange}
               onFileChange={onFileChange}
               onSubmit={onFormSubmit}
+              submitState={submitState}
             />
           </StepPanel>
         )}

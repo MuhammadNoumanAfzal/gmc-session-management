@@ -13,7 +13,27 @@ function FieldLabel({ children }) {
   )
 }
 
-function ProofUploadCard({ fileName, formData, onBack, onFieldChange, onFileChange, onSubmit }) {
+function FieldError({ error }) {
+  if (!error) {
+    return null
+  }
+
+  const message = Array.isArray(error) ? error[0] : error
+
+  return <p className="text-[10px] font-medium text-[#ffb6bf]">{message}</p>
+}
+
+function ProofUploadCard({
+  fileName,
+  formData,
+  onBack,
+  onFieldChange,
+  onFileChange,
+  onSubmit,
+  submitState,
+}) {
+  const { fieldErrors, isSubmitting } = submitState
+
   return (
     <section
       className="relative overflow-hidden rounded-[24px] border border-white/[0.08] bg-[#0f0c1b]/90 p-5 text-white shadow-[0_20px_50px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-xl"
@@ -74,6 +94,7 @@ function ProofUploadCard({ fileName, formData, onBack, onFieldChange, onFileChan
                 value={formData.fullName}
                 required
               />
+              <FieldError error={fieldErrors.fullName} />
             </label>
 
             <label className="grid gap-1.5">
@@ -87,6 +108,7 @@ function ProofUploadCard({ fileName, formData, onBack, onFieldChange, onFileChan
                 value={formData.whatsappNumber}
                 required
               />
+              <FieldError error={fieldErrors.whatsappNumber} />
             </label>
           </div>
 
@@ -102,6 +124,7 @@ function ProofUploadCard({ fileName, formData, onBack, onFieldChange, onFileChan
                 value={formData.email}
                 required
               />
+              <FieldError error={fieldErrors.email} />
             </label>
 
             <label className="grid gap-1.5">
@@ -115,6 +138,7 @@ function ProofUploadCard({ fileName, formData, onBack, onFieldChange, onFileChan
                 value={formData.transactionReference}
                 required
               />
+              <FieldError error={fieldErrors.transactionReference} />
             </label>
           </div>
 
@@ -131,6 +155,7 @@ function ProofUploadCard({ fileName, formData, onBack, onFieldChange, onFileChan
                 type="text"
                 value={formData.senderAccountLast4}
               />
+              <FieldError error={fieldErrors.senderAccountLast4} />
             </label>
 
             <label className="grid gap-1.5">
@@ -143,6 +168,7 @@ function ProofUploadCard({ fileName, formData, onBack, onFieldChange, onFileChan
                 value={formData.amountPaid}
                 readOnly
               />
+              <FieldError error={fieldErrors.amountPaid} />
             </label>
           </div>
 
@@ -170,6 +196,7 @@ function ProofUploadCard({ fileName, formData, onBack, onFieldChange, onFileChan
                 />
               </label>
             </div>
+            <FieldError error={fieldErrors.paymentProof} />
           </label>
 
           <label className="grid gap-1.5">
@@ -181,6 +208,7 @@ function ProofUploadCard({ fileName, formData, onBack, onFieldChange, onFileChan
               placeholder="Optional: mention sender name, bank app used, or anything helpful for manual verification."
               value={formData.notes}
             />
+            <FieldError error={fieldErrors.notes} />
           </label>
 
           <div className="flex flex-col gap-3.5 pt-3 border-t border-white/[0.06] mt-1 sm:flex-row sm:items-center sm:justify-between">
@@ -207,10 +235,11 @@ function ProofUploadCard({ fileName, formData, onBack, onFieldChange, onFileChan
               <motion.button
                 className="btn-primary-site inline-flex h-8.5 items-center gap-1.5 rounded-full px-5 text-xs font-bold uppercase tracking-[0.06em] shadow-[0_6px_20px_rgba(31,143,138,0.2)]"
                 type="submit"
+                disabled={isSubmitting}
                 whileHover={{ y: -1.5, shadow: '0_10px_25px_rgba(31,143,138,0.35)' }}
                 whileTap={{ scale: 0.98 }}
               >
-                Submit Proof
+                {isSubmitting ? 'Submitting...' : 'Submit Proof'}
                 <ArrowRight size={13} />
               </motion.button>
             </div>
