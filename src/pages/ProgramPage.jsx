@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import PageTransition from '../components/PageTransition'
 import SiteFooter from '../components/SiteFooter'
+import { enrollmentMeta, pricing } from '../data/enrollment'
 import ProgramBackground from '../features/program/ProgramBackground'
 import ProgramHeaderCard from '../features/program/ProgramHeaderCard'
 import ProgramStepPanels from '../features/program/ProgramStepPanels'
@@ -10,6 +11,18 @@ function ProgramPage() {
   const [copiedField, setCopiedField] = useState('')
   const [fileName, setFileName] = useState('')
   const [currentStep, setCurrentStep] = useState(1)
+  const [paymentProofForm, setPaymentProofForm] = useState({
+    fullName: '',
+    whatsappNumber: '',
+    email: '',
+    transactionReference: '',
+    senderAccountLast4: '',
+    amountPaid: pricing.discountedAmountValue,
+    notes: '',
+    paymentMethod: enrollmentMeta.paymentMethod,
+    programId: enrollmentMeta.programId,
+    sessionType: enrollmentMeta.sessionType,
+  })
   const headerRef = useRef(null)
   const [headerSpotlight, setHeaderSpotlight] = useState({ x: 0, y: 0 })
   const [isHeaderHovered, setIsHeaderHovered] = useState(false)
@@ -42,6 +55,18 @@ function ProgramPage() {
     setFileName(nextFile ? nextFile.name : '')
   }
 
+  const handlePaymentProofFieldChange = (event) => {
+    const { name, value } = event.target
+    setPaymentProofForm((current) => ({
+      ...current,
+      [name]: value,
+    }))
+  }
+
+  const handlePaymentProofSubmit = (event) => {
+    event.preventDefault()
+  }
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#07050e] text-white">
       <ProgramBackground />
@@ -65,9 +90,12 @@ function ProgramPage() {
               fileName={fileName}
               onBackToReview={() => setCurrentStep(1)}
               onCopy={handleCopy}
+              onFormFieldChange={handlePaymentProofFieldChange}
               onFileChange={handleFileChange}
+              onFormSubmit={handlePaymentProofSubmit}
               onGoToPayment={() => setCurrentStep(2)}
               onGoToProof={() => setCurrentStep(3)}
+              paymentProofForm={paymentProofForm}
             />
 
             <div className="relative left-1/2 mt-7 w-screen -translate-x-1/2">

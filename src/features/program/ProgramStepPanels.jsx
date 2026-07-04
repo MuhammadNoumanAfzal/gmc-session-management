@@ -23,9 +23,12 @@ function ProgramStepPanels({
   fileName,
   onBackToReview,
   onCopy,
+  onFormFieldChange,
   onFileChange,
+  onFormSubmit,
   onGoToPayment,
   onGoToProof,
+  paymentProofForm,
 }) {
   return (
     <div className="mt-4 mx-auto min-h-[380px] max-w-[580px] px-2">
@@ -49,7 +52,14 @@ function ProgramStepPanels({
 
         {currentStep === 3 && (
           <StepPanel panelKey="step-3">
-            <ProofUploadCard fileName={fileName} onFileChange={onFileChange} onBack={onGoToPayment} />
+            <ProofUploadCard
+              fileName={fileName}
+              formData={paymentProofForm}
+              onBack={onGoToPayment}
+              onFieldChange={onFormFieldChange}
+              onFileChange={onFileChange}
+              onSubmit={onFormSubmit}
+            />
           </StepPanel>
         )}
       </AnimatePresence>

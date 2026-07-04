@@ -5,8 +5,15 @@ export const pricing = {
     'Secure your GMC strategy session, upload your payment proof, and get manually verified before your consultation is confirmed.',
   originalPrice: 'Rs. 8,000',
   discountedPrice: 'Rs. 4,900',
+  discountedAmountValue: '4900',
   urgencyLabel: 'Current offer fill rate',
   urgencyValue: '90%',
+}
+
+export const enrollmentMeta = {
+  programId: 'gmc-scholarship-consultation',
+  sessionType: 'GMC Scholarship Consultation',
+  paymentMethod: 'bank_transfer',
 }
 
 export const paymentSteps = [
