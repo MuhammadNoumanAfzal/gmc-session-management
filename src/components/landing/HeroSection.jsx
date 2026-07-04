@@ -57,7 +57,7 @@ function HeroSection() {
       setActiveTitleIndex((currentIndex) =>
         currentIndex === titleMessages.length - 1 ? 0 : currentIndex + 1,
       )
-    }, 3200)
+    }, 6500)
 
     return () => window.clearInterval(intervalId)
   }, [prefersReducedMotion])
