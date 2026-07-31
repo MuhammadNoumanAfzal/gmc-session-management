@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Star } from 'lucide-react'
 
-function HeroBadge({ heroReveal, prefersReducedMotion, smoothEase }) {
+function HeroBadge({ badgeText, heroReveal, prefersReducedMotion, smoothEase }) {
   return (
     <motion.div
       className="mb-5 inline-flex w-auto max-w-[min(94vw,860px)] items-center justify-center gap-2 rounded-full border border-[#b467ff3d] bg-[#b467ff17] px-6 py-3 text-center text-[11px] font-bold text-[#efd9ff] sm:px-7 sm:text-[13px]"
@@ -21,9 +21,7 @@ function HeroBadge({ heroReveal, prefersReducedMotion, smoothEase }) {
       viewport={{ once: true }}
     >
       <Star className="shrink-0 animate-pulse text-[#dba8ff]" size={14} fill="currentColor" />
-      <span className="whitespace-normal leading-tight">
-        Learn From Students Who Won Fully Funded Scholarships
-      </span>
+      <span className="whitespace-normal leading-tight">{badgeText}</span>
     </motion.div>
   )
 }

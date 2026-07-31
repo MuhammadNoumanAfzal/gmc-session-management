@@ -6,10 +6,12 @@ import HeroBadge from '../../features/home/hero/HeroBadge'
 import HeroCtaBlock from '../../features/home/hero/HeroCtaBlock'
 import HeroTitleCard from '../../features/home/hero/HeroTitleCard'
 import HeroVisualShowcase from '../../features/home/hero/HeroVisualShowcase'
-import { smoothEase, titleMessages } from '../../features/home/hero/constants'
+import { useHeroContent } from '../../features/home/hero/hooks/useHeroContent'
+import { smoothEase } from '../../features/home/hero/constants'
 
 function HeroSection() {
   const prefersReducedMotion = useReducedMotion()
+  const { heroContent } = useHeroContent()
   const [activeTitleIndex, setActiveTitleIndex] = useState(0)
   const heroRef = useRef(null)
   const [titleSpotlight, setTitleSpotlight] = useState({ x: 0, y: 0 })
@@ -18,6 +20,7 @@ function HeroSection() {
   const mouseY = useMotionValue(0)
   const springX = useSpring(mouseX, { damping: 28, stiffness: 150 })
   const springY = useSpring(mouseY, { damping: 28, stiffness: 150 })
+  const titleMessages = heroContent.titleMessages
 
   const handleHeroMouseMove = (event) => {
     if (prefersReducedMotion) {
@@ -49,6 +52,14 @@ function HeroSection() {
       }
 
   useEffect(() => {
+    if (activeTitleIndex <= titleMessages.length - 1) {
+      return
+    }
+
+    setActiveTitleIndex(0)
+  }, [activeTitleIndex, titleMessages.length])
+
+  useEffect(() => {
     if (prefersReducedMotion) {
       return undefined
     }
@@ -60,7 +71,7 @@ function HeroSection() {
     }, 6500)
 
     return () => window.clearInterval(intervalId)
-  }, [prefersReducedMotion])
+  }, [prefersReducedMotion, titleMessages.length])
 
   return (
     <section
@@ -69,12 +80,13 @@ function HeroSection() {
       className="relative overflow-hidden px-0 pt-28 pb-20 select-none md:pt-22 md:pb-14"
     >
       <HeroBackground prefersReducedMotion={prefersReducedMotion} springX={springX} springY={springY} />
-      <HeroAnnouncementBar />
+      <HeroAnnouncementBar announcementText={heroContent.announcementText} />
 
       <div className="relative z-10 mx-auto mt-3 w-full max-w-[1320px] px-4 sm:mt-4 sm:px-5">
         <div className="flex flex-col items-center">
           <div className="w-full max-w-[1240px] text-center">
             <HeroBadge
+              badgeText={heroContent.badgeText}
               heroReveal={heroReveal}
               prefersReducedMotion={prefersReducedMotion}
               smoothEase={smoothEase}
@@ -93,12 +105,23 @@ function HeroSection() {
 
           <div className="z-10 mt-9 w-full" id="student-results">
             <HeroVisualShowcase
+              heroImageAlt={heroContent.heroImageAlt}
+              heroImageUrl={heroContent.heroImageUrl}
               prefersReducedMotion={prefersReducedMotion}
               smoothEase={smoothEase}
               springX={springX}
               springY={springY}
             />
-            <HeroCtaBlock prefersReducedMotion={prefersReducedMotion} smoothEase={smoothEase} />
+            <HeroCtaBlock
+              ctaEyebrow={heroContent.ctaEyebrow}
+              ctaLabel={heroContent.ctaLabel}
+              ctaUrl={heroContent.ctaUrl}
+              prefersReducedMotion={prefersReducedMotion}
+              smoothEase={smoothEase}
+              trustAvatarCount={heroContent.trustAvatarCount}
+              trustDescription={heroContent.trustDescription}
+              trustTitle={heroContent.trustTitle}
+            />
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { motion, useTransform } from 'framer-motion'
 
-function HeroVisualShowcase({ prefersReducedMotion, smoothEase, springX, springY }) {
+function HeroVisualShowcase({ heroImageAlt, heroImageUrl, prefersReducedMotion, smoothEase, springX, springY }) {
   return (
     <div className="relative mx-auto max-w-[1020px] px-2 pt-10 sm:px-5">
       <motion.div
@@ -36,8 +36,8 @@ function HeroVisualShowcase({ prefersReducedMotion, smoothEase, springX, springY
 
         <motion.img
           className="relative z-[1] w-full object-cover mix-blend-screen"
-          src="/hero.png"
-          alt="GMC student scholarship winners group"
+          src={heroImageUrl}
+          alt={heroImageAlt}
           animate={prefersReducedMotion ? undefined : { scale: [1, 1.008, 1], y: [0, -2, 0] }}
           transition={{ duration: 11.2, repeat: Infinity, ease: 'easeInOut' }}
         />
