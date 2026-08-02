@@ -1,34 +1,19 @@
 import { useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { Compass, FileText, GraduationCap, SearchCheck } from 'lucide-react'
+import { useSessionAudienceContent } from '../../features/home/sessionAudience/hooks/useSessionAudienceContent'
 import SectionReveal from '../SectionReveal'
 
-const audienceCards = [
-  {
-    icon: GraduationCap,
-    title: 'Students planning funded admissions',
-    description: 'Ideal for applicants who want clearer direction before starting scholarship applications.',
-  },
-  {
-    icon: SearchCheck,
-    title: 'Students confused about where to apply',
-    description: 'Best for those struggling with university shortlisting, fit, and scholarship targeting.',
-  },
-  {
-    icon: FileText,
-    title: 'Students needing SOP and document guidance',
-    description: 'Helpful if your documents feel weak, generic, or not aligned with your goals.',
-  },
-  {
-    icon: Compass,
-    title: 'Students who want a roadmap, not random advice',
-    description: 'Perfect for serious applicants who want practical feedback and step-by-step clarity.',
-  },
-]
+const iconMap = {
+  'graduation-cap': GraduationCap,
+  'search-check': SearchCheck,
+  'file-text': FileText,
+  compass: Compass,
+}
 
 function TiltAudienceCard({ card, index }) {
   const cardRef = useRef(null)
-  const Icon = card.icon
+  const Icon = iconMap[card.iconKey] || GraduationCap
   const [isHovered, setIsHovered] = useState(false)
   const [spotlightPos, setSpotlightPos] = useState({ x: 0, y: 0 })
 
@@ -134,6 +119,8 @@ function TiltAudienceCard({ card, index }) {
 }
 
 function SessionAudienceSection() {
+  const { content } = useSessionAudienceContent()
+
   return (
     <section className="relative bg-[#f8f6fb] py-8 sm:py-10" id="who-its-for">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,#08080b_0%,rgba(8,8,11,0.68)_22%,rgba(248,246,251,0.94)_78%,#f8f6fb_100%)]" />
@@ -141,22 +128,21 @@ function SessionAudienceSection() {
         <SectionReveal className="relative z-10 mb-6 text-center sm:mb-8">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#cfa5ff]/40 bg-white px-4 py-1.5 text-[11px] font-semibold text-[#8d41ef] shadow-[0_10px_24px_rgba(180,103,255,0.08)] sm:text-xs">
             <GraduationCap size={14} className="text-[#8c36ff]" />
-            For Whom Is This Session For?
+            {content.badgeText}
           </div>
           <h2 className="mt-3.5 [font-family:'Outfit',sans-serif] text-[1.65rem] font-bold leading-[1.06] text-[#121019] sm:text-[2.1rem] md:text-[2.5rem]">
-            Built for students who want
+            {content.headingLine1}
             <span className="block bg-gradient-to-r from-[#cf9eff] to-[#8c36ff] bg-clip-text text-transparent">
-              clarity before they apply.
+              {content.headingLine2}
             </span>
           </h2>
           <p className="mx-auto mt-2.5 max-w-[700px] text-sm leading-6 text-[#4a4156]">
-            This session is not for casual browsing. It is for students who want smarter decisions,
-            stronger documents, and a cleaner scholarship roadmap.
+            {content.description}
           </p>
         </SectionReveal>
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {audienceCards.map((card, index) => (
+          {content.audienceCards.map((card, index) => (
             <TiltAudienceCard key={card.title} card={card} index={index} />
           ))}
         </div>
