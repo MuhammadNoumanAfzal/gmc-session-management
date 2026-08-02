@@ -1,10 +1,13 @@
 import ContinuousTrack from '../../features/home/media/ContinuousTrack'
 import ReviewProofCard from '../../features/home/media/ReviewProofCard'
 import VideoProofCard from '../../features/home/media/VideoProofCard'
-import { reviewItems, videoItems } from '../../features/home/media/mediaProofData'
+import { useMediaProofContent } from '../../features/home/media/hooks/useMediaProofContent'
 import SectionReveal from '../SectionReveal'
 
 function MediaProofSection() {
+  const { content } = useMediaProofContent()
+  const videoItems = content.videoItems
+  const reviewItems = content.reviewItems
   const loopedVideos = [...videoItems, ...videoItems]
   const loopedReviews = [...reviewItems, ...reviewItems]
 
@@ -14,14 +17,13 @@ function MediaProofSection() {
       <div className="relative mx-auto w-full max-w-[1320px] px-4 sm:px-5">
         <SectionReveal className="mb-8 text-center sm:mb-10">
           <p className="mb-3 inline-flex rounded-full border border-[#b467ff]/25 bg-[#b467ff]/10 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-[#d9beff] sm:text-xs">
-            Real Proof
+            {content.badgeText}
           </p>
           <h2 className="[font-family:'Outfit',sans-serif] text-[1.9rem] font-bold leading-[1.06] text-white sm:text-[2.5rem]">
-            Real conversations. Real feedback.
+            {content.heading}
           </h2>
           <p className="mx-auto mt-3 max-w-[680px] text-sm leading-7 text-white/68 sm:text-[15px]">
-            Use this area for student call clips and review screenshots so visitors see trust
-            signals without needing long paragraphs.
+            {content.description}
           </p>
         </SectionReveal>
 
