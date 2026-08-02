@@ -3,11 +3,13 @@ import { ArrowRight, GraduationCap } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import MentorGallery from '../../features/home/mentor/MentorGallery'
 import MentorHighlights from '../../features/home/mentor/MentorHighlights'
-import { mentorGalleryCards } from '../../features/home/mentor/mentorData'
+import { useMentorTrustContent } from '../../features/home/mentor/hooks/useMentorTrustContent'
 import SectionReveal from '../SectionReveal'
 
 function MentorTrustSection() {
   const smoothEase = [0.22, 1, 0.36, 1]
+  const { content } = useMentorTrustContent()
+  const mentorGalleryCards = content.galleryCards
   const leftColumnCards = [
     mentorGalleryCards[0],
     mentorGalleryCards[1],
@@ -61,37 +63,27 @@ function MentorTrustSection() {
             transition={{ duration: 0.7, ease: smoothEase }}
           >
             <GraduationCap size={14} />
-            Your Scholarship Mentor
+            {content.badgeText}
           </motion.div>
 
           <h2 className="mt-3.5 max-w-[620px] [font-family:'Outfit',sans-serif] text-[1.7rem] font-bold leading-[1.06] text-white sm:text-[2.1rem] md:text-[2.6rem]">
-            Meet{' '}
+            {content.headingPrefix}{' '}
             <span className="bg-[linear-gradient(90deg,#f5ecff_0%,#cf9dff_34%,#9b57ff_100%)] bg-clip-text text-transparent">
-              GMC Guidance
+              {content.headingAccent}
             </span>
           </h2>
 
           <p className="mt-3 max-w-[600px] text-[0.94rem] leading-6 text-[#d8d0e4]">
-            Strategic mentorship for students who want sharper scholarship decisions, cleaner
-            positioning, and a more confident global application path. We work closely with you to
-            dissect your profile, evaluate your funding chances, and optimize every piece of your
-            application.
+            {content.introParagraph}
           </p>
 
           <div className="mt-4 max-w-[600px] space-y-3 text-[0.9rem] leading-6 text-white/70">
-            <p>
-              Our process is built on real strategies, not guesswork. We help you identify weak
-              spots in your SOP, shortlists, and documents early, saving you months of blind
-              applications, expensive mistakes, and frustrating rejections.
-            </p>
-            <p>
-              Whether you are targeting global admits or looking for specific funding paths, GMC
-              provides a clear, step-by-step roadmap. We focus on matching your academic strength
-              to programs where your profile stands a high chance of fully-funded offers.
-            </p>
+            {content.bodyParagraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
 
-          <MentorHighlights />
+          <MentorHighlights highlights={content.highlights} />
 
           <motion.div
             className="mt-5.5 flex flex-col gap-3.5 sm:flex-row sm:items-center"
@@ -102,12 +94,12 @@ function MentorTrustSection() {
           >
             <Link
               className="btn-primary-site min-h-[52px] rounded-[16px] px-6 text-center [font-family:'Outfit',sans-serif] text-sm font-semibold uppercase sm:min-h-[58px]"
-              to="/program"
+              to={content.ctaUrl}
             >
-              Book a Consultation <ArrowRight size={16} />
+              {content.ctaLabel} <ArrowRight size={16} />
             </Link>
             <p className="max-w-[280px] text-xs leading-5 text-white/50">
-              Replace the gallery photos with real student or mentor images anytime.
+              {content.ctaNote}
             </p>
           </motion.div>
         </SectionReveal>

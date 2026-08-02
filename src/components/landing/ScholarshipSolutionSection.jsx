@@ -1,11 +1,13 @@
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ScholarshipIntro from '../../features/home/scholarship/ScholarshipIntro'
-import { workflowCards } from '../../features/home/scholarship/scholarshipData'
 import ScholarshipWorkflowSlider from '../../features/home/scholarship/ScholarshipWorkflowSlider'
+import { useScholarshipSolutionContent } from '../../features/home/scholarship/hooks/useScholarshipSolutionContent'
 import SectionReveal from '../SectionReveal'
 
 function ScholarshipSolutionSection() {
+  const { content } = useScholarshipSolutionContent()
+  const workflowCards = content.workflowCards
   const sliderCards = [...workflowCards, ...workflowCards]
 
   return (
@@ -19,7 +21,11 @@ function ScholarshipSolutionSection() {
       <div className="pointer-events-none absolute inset-x-[24%] top-[10%] h-[220px] bg-[radial-gradient(circle,rgba(255,255,255,0.85)_0%,rgba(255,255,255,0.35)_38%,transparent_78%)] blur-3xl" />
       <div className="relative mx-auto flex w-full max-w-[1320px] items-center px-4 sm:px-5 lg:min-h-screen">
         <div className="w-full">
-          <ScholarshipIntro />
+          <ScholarshipIntro
+            badgeText={content.badgeText}
+            featurePills={content.featurePills}
+            heading={content.heading}
+          />
           <ScholarshipWorkflowSlider
             sliderCards={sliderCards}
             workflowCardCount={workflowCards.length}
@@ -28,9 +34,9 @@ function ScholarshipSolutionSection() {
           <SectionReveal className="mt-4 flex justify-center lg:mt-3">
             <Link
               className="btn-primary-site min-h-[62px] w-full max-w-[620px] rounded-[24px] px-5 text-center [font-family:'Outfit',sans-serif] text-base font-semibold uppercase sm:min-h-[72px] sm:text-[1.05rem]"
-              to="/program"
+              to={content.ctaUrl}
             >
-              Book Your Consultation <ArrowRight size={18} />
+              {content.ctaLabel} <ArrowRight size={18} />
             </Link>
           </SectionReveal>
         </div>

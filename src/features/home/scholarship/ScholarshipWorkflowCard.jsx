@@ -1,5 +1,7 @@
+import { workflowIcons } from './constants/workflowIcons'
+
 function ScholarshipWorkflowCard({ card, index, total }) {
-  const Icon = card.icon
+  const Icon = workflowIcons[card.iconKey] || workflowIcons.GraduationCap
 
   return (
     <article className="scholarship-slider-card h-[270px] w-[250px] shrink-0 cursor-pointer [perspective:1400px] sm:h-[300px] sm:w-[280px]">
