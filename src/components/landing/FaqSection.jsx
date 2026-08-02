@@ -1,40 +1,8 @@
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { HelpCircle, Minus, Plus } from 'lucide-react'
 import { useState, useRef } from 'react'
+import { useFaqContent } from '../../features/home/faq/hooks/useFaqContent'
 import SectionReveal from '../SectionReveal'
-
-const faqs = [
-  {
-    question: 'Who is this consultation best for?',
-    answer:
-      'It is best for students who want clearer scholarship direction, better university shortlisting, stronger SOP guidance, and honest feedback before applying.',
-  },
-  {
-    question: 'Will you help me choose the university & scholarship?',
-    answer:
-      'Yes. The session is designed to help you think more strategically about scholarship fit, university options, and where your profile has the best chance.',
-  },
-  {
-    question: 'Do you review SOPs and supporting documents too?',
-    answer:
-      'Yes. We can discuss how to improve your SOP, documents, and overall presentation so your application feels stronger and more intentional.',
-  },
-  {
-    question: 'Is this only for students with strong profiles?',
-    answer:
-      'No. It is also helpful for students starting from zero who need a roadmap, realistic expectations, and a better understanding of how to move forward.',
-  },
-  {
-    question: 'Will this guarantee a scholarship?',
-    answer:
-      'No one can honestly guarantee that. What this session does offer is clearer strategy, fewer weak decisions, and better preparation for funded admissions.',
-  },
-  {
-    question: 'What happens after the consultation?',
-    answer:
-      'You leave with more clarity on next steps, profile direction, application priorities, and what needs improvement before you start applying seriously.',
-  },
-]
 
 function FaqItem({ answer, isOpen, onToggle, question }) {
   const cardRef = useRef(null)
@@ -149,6 +117,7 @@ function FaqItem({ answer, isOpen, onToggle, question }) {
 
 function FaqSection() {
   const [openIndex, setOpenIndex] = useState(0)
+  const { content } = useFaqContent()
 
   return (
     <section className="relative overflow-hidden bg-[#08080b] py-8 sm:py-10" id="faq">
@@ -157,23 +126,22 @@ function FaqSection() {
         <SectionReveal className="mb-6 text-center sm:mb-8">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#b467ff]/30 bg-[#b467ff]/10 px-4 py-1.5 text-[11px] font-semibold text-[#d9beff] shadow-[0_10px_24px_rgba(180,103,255,0.08)] sm:text-xs">
             <HelpCircle size={14} className="text-[#c1a0ff]" />
-            Frequently Asked Questions
+            {content.badgeText}
           </div>
           <h2 className="mt-3.5 [font-family:'Outfit',sans-serif] text-[1.65rem] font-bold leading-[1.06] text-white sm:text-[2.1rem] md:text-[2.5rem]">
-            Common questions before
+            {content.headingLine1}
             <span className="block bg-gradient-to-r from-[#cf9eff] to-[#8c36ff] bg-clip-text text-transparent">
-              booking your consultation.
+              {content.headingLine2}
             </span>
           </h2>
           <p className="mx-auto mt-2.5 max-w-[700px] text-sm leading-6 text-white/68">
-            Short, direct answers so students know exactly what this session helps with and what
-            it does not promise.
+            {content.description}
           </p>
         </SectionReveal>
 
         {/* Space-saving 2-column layout for FAQs */}
         <div className="mx-auto grid max-w-[1180px] gap-4 md:grid-cols-2 lg:gap-5">
-          {faqs.map((faq, index) => (
+          {content.faqItems.map((faq, index) => (
             <FaqItem
               answer={faq.answer}
               isOpen={openIndex === index}
