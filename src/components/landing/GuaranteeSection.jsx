@@ -1,15 +1,10 @@
 import { useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { BadgeCheck, ShieldCheck, AlertCircle } from 'lucide-react'
+import { useGuaranteeContent } from '../../features/home/guarantee/hooks/useGuaranteeContent'
 import SectionReveal from '../SectionReveal'
 
-const guaranteePoints = [
-  'Attend the consultation and follow the guidance seriously.',
-  'Apply the profile, shortlist, SOP, and document feedback properly.',
-  'Show real implementation if you still feel the session did not deliver value.',
-]
-
-function GuaranteeSeal() {
+function GuaranteeSeal({ sealBadgeText, sealFooterText, sealValueText }) {
   const sealRef = useRef(null)
   const [isHovered, setIsHovered] = useState(false)
 
@@ -81,7 +76,7 @@ function GuaranteeSeal() {
                 className="[font-family:'Outfit',sans-serif] text-[8px] font-bold uppercase tracking-[0.18em] text-[#d6b4ff] sm:text-[9px]"
                 style={{ transform: 'translateZ(10px)' }}
               >
-                GMC Guarantee
+                {sealBadgeText}
               </p>
 
               {/* Huge 3D "100%" */}
@@ -89,7 +84,7 @@ function GuaranteeSeal() {
                 className="mt-0.5 [font-family:'Outfit',sans-serif] text-[1.65rem] font-extrabold leading-none text-white sm:text-[2.1rem] bg-gradient-to-b from-white via-[#f0e5ff] to-[#dcbaff] bg-clip-text text-transparent drop-shadow-[0_3px_6px_rgba(0,0,0,0.6)]"
                 style={{ transform: 'translateZ(25px)' }}
               >
-                100%
+                {sealValueText}
               </p>
 
               {/* Footer text */}
@@ -97,7 +92,7 @@ function GuaranteeSeal() {
                 className="mt-1 max-w-[100px] text-[7.5px] font-semibold uppercase leading-[1.3] tracking-[0.12em] text-[#a99bbd] sm:max-w-[120px] sm:text-[8.5px]"
                 style={{ transform: 'translateZ(10px)' }}
               >
-                Value-Driven Strategy Commitment
+                {sealFooterText}
               </p>
             </div>
           </div>
@@ -110,6 +105,7 @@ function GuaranteeSeal() {
 function GuaranteeSection() {
   const smoothEase = [0.22, 1, 0.36, 1]
   const cardRef = useRef(null)
+  const { content } = useGuaranteeContent()
 
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [isCardHovered, setIsCardHovered] = useState(false)
@@ -131,7 +127,7 @@ function GuaranteeSection() {
         <div className="relative z-10 mb-6 flex justify-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#cfa5ff]/40 bg-white/92 px-4 py-1.5 text-[11px] font-semibold text-[#8d41ef] shadow-[0_10px_24px_rgba(180,103,255,0.08)] backdrop-blur-md sm:text-xs">
             <BadgeCheck size={14} className="text-[#8c36ff]" />
-            Zero fluff. Real strategy. Clear accountability.
+            {content.topBadgeText}
           </div>
         </div>
 
@@ -230,25 +226,23 @@ function GuaranteeSection() {
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full bg-[#f1e6ff] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.08em] text-[#9d4dff] sm:text-xs">
                   <BadgeCheck size={14} />
-                  Here&apos;s the Guarantee
+                  {content.sectionBadgeText}
                 </div>
 
                 <h2 className="mt-3 max-w-[640px] [font-family:'Outfit',sans-serif] text-[1.65rem] font-bold leading-[1.06] text-white sm:text-[2.1rem] md:text-[2.45rem]">
-                  Serious guidance.
+                  {content.headingLine1}
                   <span className="block bg-gradient-to-r from-[#cf9eff] to-[#8f43ff] bg-clip-text text-transparent">
-                    Serious accountability.
+                    {content.headingLine2}
                   </span>
                 </h2>
 
                 <p className="mt-2.5 max-w-[640px] text-sm leading-6 text-white/72">
-                  We don&apos;t believe in empty promises. We believe in honest strategy, practical
-                  feedback, and real implementation. If you fully apply the session guidance and
-                  still feel it delivered no value, we review your case fairly.
+                  {content.description}
                 </p>
 
                 {/* Compact checklist points */}
                 <div className="mt-4 grid gap-2.5">
-                  {guaranteePoints.map((point, index) => (
+                  {content.guaranteePoints.map((point, index) => (
                     <motion.div
                       className="flex items-start gap-2.5 rounded-[16px] border border-white/6 bg-white/[0.02] px-3.5 py-3 hover:border-[#b467ff]/24 hover:bg-white/[0.05] hover:shadow-[0_6px_16px_rgba(143,67,255,0.06)] transition-all duration-300 cursor-default"
                       key={point}
@@ -272,20 +266,24 @@ function GuaranteeSection() {
                   </div>
                   
                   <p className="text-[9px] font-bold uppercase tracking-[0.08em] text-[#cfb1ff] sm:text-xs">
-                    Simple Principle
+                    {content.principleLabel}
                   </p>
                   <p className="mt-1.5 [font-family:'Outfit',sans-serif] text-base font-bold leading-tight text-white">
-                    This only works if you execute.
+                    {content.principleTitle}
                   </p>
                   <p className="mt-1 text-xs leading-5 text-white/64">
-                    That is why implementation matters as much as the advice itself.
+                    {content.principleDescription}
                   </p>
                 </div>
               </div>
 
               {/* Right Seal column */}
               <div className="flex justify-center lg:justify-end">
-                <GuaranteeSeal />
+                <GuaranteeSeal
+                  sealBadgeText={content.sealBadgeText}
+                  sealFooterText={content.sealFooterText}
+                  sealValueText={content.sealValueText}
+                />
               </div>
             </div>
           </div>
