@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
-import { programSteps } from './constants'
 
-function ProgramStepTracker({ currentStep, onStepChange }) {
+function ProgramStepTracker({ currentStep, onStepChange, stepItems }) {
   return (
     <div className="mt-4 mx-auto max-w-[580px] rounded-[22px] border border-white/[0.06] bg-[#0d0919]/60 px-5 py-3 shadow-[0_12px_32px_rgba(0,0,0,0.2)] backdrop-blur-md">
       <div className="relative flex items-center justify-between">
@@ -14,7 +13,7 @@ function ProgramStepTracker({ currentStep, onStepChange }) {
           transition={{ duration: 0.35, ease: 'easeInOut' }}
         />
 
-        {programSteps.map((item) => (
+        {stepItems.map((item) => (
           <button
             key={item.step}
             onClick={() => {

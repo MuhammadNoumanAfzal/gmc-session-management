@@ -1,16 +1,17 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Swal from 'sweetalert2'
 import PageTransition from '../components/PageTransition'
 import SiteFooter from '../components/SiteFooter'
-import { enrollmentMeta, pricing } from '../data/enrollment'
 import ProgramBackground from '../features/program/ProgramBackground'
 import ProgramHeaderCard from '../features/program/ProgramHeaderCard'
 import ProgramStepPanels from '../features/program/ProgramStepPanels'
 import ProgramStepTracker from '../features/program/ProgramStepTracker'
+import { useEnrollmentFlowContent } from '../features/enrollment/hooks/useEnrollmentFlowContent'
 
 function ProgramPage() {
   const paymentProofEndpoint =
     import.meta.env.VITE_PAYMENT_PROOF_ENDPOINT ?? 'http://127.0.0.1:8000/api/payment-proofs'
+  const { content } = useEnrollmentFlowContent()
   const [copiedField, setCopiedField] = useState('')
   const [fileName, setFileName] = useState('')
   const [paymentProofFile, setPaymentProofFile] = useState(null)
@@ -28,15 +29,30 @@ function ProgramPage() {
     email: '',
     transactionReference: '',
     senderAccountLast4: '',
-    amountPaid: pricing.discountedAmountValue,
+    amountPaid: content.discountedAmountValue,
     notes: '',
-    paymentMethod: enrollmentMeta.paymentMethod,
-    programId: enrollmentMeta.programId,
-    sessionType: enrollmentMeta.sessionType,
+    paymentMethod: content.metaPaymentMethod,
+    programId: content.metaProgramId,
+    sessionType: content.metaSessionType,
   })
   const headerRef = useRef(null)
   const [headerSpotlight, setHeaderSpotlight] = useState({ x: 0, y: 0 })
   const [isHeaderHovered, setIsHeaderHovered] = useState(false)
+
+  useEffect(() => {
+    setPaymentProofForm((current) => ({
+      ...current,
+      amountPaid: content.discountedAmountValue,
+      paymentMethod: content.metaPaymentMethod,
+      programId: content.metaProgramId,
+      sessionType: content.metaSessionType,
+    }))
+  }, [
+    content.discountedAmountValue,
+    content.metaPaymentMethod,
+    content.metaProgramId,
+    content.metaSessionType,
+  ])
 
   const handleHeaderMouseMove = (event) => {
     if (!headerRef.current) {
@@ -253,6 +269,7 @@ function ProgramPage() {
         <section className="relative z-10 px-0 py-6 pb-0 sm:py-8 sm:pb-0">
           <div className="mx-auto w-full max-w-[1220px] px-4 sm:px-5">
             <ProgramHeaderCard
+              content={content}
               headerRef={headerRef}
               isHeaderHovered={isHeaderHovered}
               onMouseLeave={() => setIsHeaderHovered(false)}
@@ -260,9 +277,10 @@ function ProgramPage() {
               spotlight={headerSpotlight}
             />
 
-            <ProgramStepTracker currentStep={currentStep} onStepChange={setCurrentStep} />
+            <ProgramStepTracker currentStep={currentStep} onStepChange={setCurrentStep} stepItems={content.stepItems} />
 
             <ProgramStepPanels
+              content={content}
               copiedField={copiedField}
               currentStep={currentStep}
               fileName={fileName}

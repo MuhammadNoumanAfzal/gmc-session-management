@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import SectionReveal from '../../components/SectionReveal'
 
 function ProgramHeaderCard({
+  content,
   headerRef,
   isHeaderHovered,
   onMouseLeave,
@@ -36,13 +37,13 @@ function ProgramHeaderCard({
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[#b467ff]" />
               </span>
               <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#d0b3ff] [font-family:'Outfit',sans-serif]">
-                GMC Scholarship Consultancy
+                {content.headerBadgeText}
               </p>
             </div>
             <h1 className="mt-1.5 [font-family:'Outfit',sans-serif] text-[1.4rem] font-bold leading-[1.08] text-white sm:text-[1.8rem] lg:text-[2.05rem]">
-              Complete your booking with a{' '}
+              {content.headerHeadingLine1}{' '}
               <span className="bg-gradient-to-r from-white via-[#d6a8ff] to-[#a352ff] bg-clip-text text-transparent">
-                clean, verified payment.
+                {content.headerHeadingHighlight}
               </span>
             </h1>
           </div>
@@ -53,7 +54,7 @@ function ProgramHeaderCard({
               to="/"
             >
               <ArrowLeft size={14} className="text-white/70 transition-transform duration-300 group-hover:-translate-x-0.5 group-hover:text-white" />
-              <span>Back to landing page</span>
+              <span>{content.backButtonText}</span>
             </Link>
           </motion.div>
         </div>

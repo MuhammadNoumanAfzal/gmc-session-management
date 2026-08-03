@@ -1,6 +1,5 @@
 import { AlertTriangle, ArrowRight, UploadCloud, MessageCircle } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { enrollmentMeta, pricing } from '../../data/enrollment'
 
 const inputClassName =
   'h-9.5 rounded-xl border border-white/10 bg-[#171224] px-3.5 text-xs.5 font-medium text-white outline-none transition focus:border-[#b467ff] focus:ring-1 focus:ring-[#b467ff]/20 placeholder-white/20'
@@ -24,6 +23,7 @@ function FieldError({ error }) {
 }
 
 function ProofUploadCard({
+  content,
   fileName,
   formData,
   onBack,
@@ -45,11 +45,11 @@ function ProofUploadCard({
       <div className="relative z-10">
         <div className="mb-2.5 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-[#d8beff]">
           <UploadCloud size={12} className="text-[#c595ff]" />
-          Upload Payment Proof
+          {content.proofBadgeText}
         </div>
 
         <h2 className="[font-family:'Outfit',sans-serif] text-[1.2rem] leading-[1.08] font-bold text-white tracking-tight">
-          Submit screenshot for manual verification.
+          {content.proofHeading}
         </h2>
 
         {/* Warning banner in dark red style */}
@@ -59,7 +59,7 @@ function ProofUploadCard({
               <AlertTriangle size={13} />
             </div>
             <p className="text-[11px] leading-4 text-[#ffccd1] font-semibold">
-              Do not upload a fake screenshot. GMC reviews payments manually before confirming booking.
+              {content.proofWarningText}
             </p>
           </div>
         </div>
@@ -68,17 +68,17 @@ function ProofUploadCard({
           <div className="grid gap-3 rounded-[18px] border border-white/[0.05] bg-[#120f21]/85 p-3.5 sm:grid-cols-3">
             <div>
               <FieldLabel>Session Type</FieldLabel>
-              <p className="mt-1 text-xs font-semibold text-white/90">{enrollmentMeta.sessionType}</p>
+              <p className="mt-1 text-xs font-semibold text-white/90">{content.metaSessionType}</p>
             </div>
             <div>
               <FieldLabel>Payment Method</FieldLabel>
               <p className="mt-1 text-xs font-semibold uppercase text-white/90">
-                {enrollmentMeta.paymentMethod.replace('_', ' ')}
+                {content.metaPaymentMethod.replace('_', ' ')}
               </p>
             </div>
             <div>
               <FieldLabel>Amount Due</FieldLabel>
-              <p className="mt-1 text-xs font-semibold text-white/90">{pricing.discountedPrice}</p>
+              <p className="mt-1 text-xs font-semibold text-white/90">{content.discountedPrice}</p>
             </div>
           </div>
 
@@ -219,7 +219,7 @@ function ProofUploadCard({
               className="inline-flex items-center gap-1.5 text-[11px] text-white/80 hover:text-white transition-colors"
             >
               <MessageCircle size={13.5} className="text-[#c595ff]" />
-              <span>Chat with WhatsApp Support</span>
+              <span>{content.proofSupportText}</span>
             </a>
             <div className="flex flex-wrap gap-2.5">
               <motion.button
@@ -229,7 +229,7 @@ function ProofUploadCard({
                 whileHover={{ y: -1 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Back
+                {content.proofBackButtonText}
               </motion.button>
               
               <motion.button
@@ -239,7 +239,7 @@ function ProofUploadCard({
                 whileHover={{ y: -1.5, shadow: '0_10px_25px_rgba(31,143,138,0.35)' }}
                 whileTap={{ scale: 0.98 }}
               >
-                {isSubmitting ? 'Submitting...' : 'Submit Proof'}
+                {isSubmitting ? 'Submitting...' : content.proofSubmitButtonText}
                 <ArrowRight size={13} />
               </motion.button>
             </div>

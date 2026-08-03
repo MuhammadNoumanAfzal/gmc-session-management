@@ -18,6 +18,7 @@ function StepPanel({ children, panelKey }) {
 }
 
 function ProgramStepPanels({
+  content,
   copiedField,
   currentStep,
   fileName,
@@ -36,13 +37,14 @@ function ProgramStepPanels({
       <AnimatePresence mode="wait">
         {currentStep === 1 && (
           <StepPanel panelKey="step-1">
-            <EnrollmentSummaryCard onNext={onGoToPayment} />
+            <EnrollmentSummaryCard content={content} onNext={onGoToPayment} />
           </StepPanel>
         )}
 
         {currentStep === 2 && (
           <StepPanel panelKey="step-2">
             <TransferDetailsCard
+              content={content}
               copiedField={copiedField}
               onCopy={onCopy}
               onBack={onBackToReview}
@@ -54,6 +56,7 @@ function ProgramStepPanels({
         {currentStep === 3 && (
           <StepPanel panelKey="step-3">
             <ProofUploadCard
+              content={content}
               fileName={fileName}
               formData={paymentProofForm}
               onBack={onGoToPayment}

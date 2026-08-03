@@ -1,8 +1,7 @@
 import { Copy, Landmark, Check, ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { bankDetails, supportNotes } from '../../data/enrollment'
 
-function TransferDetailsCard({ copiedField, onCopy, onBack, onNext }) {
+function TransferDetailsCard({ content, copiedField, onCopy, onBack, onNext }) {
   return (
     <aside className="relative overflow-hidden rounded-[24px] border border-white/[0.08] bg-[#0f0c1b]/90 p-5 text-white shadow-[0_20px_50px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-xl">
       {/* Background ambient glow inside the card */}
@@ -14,12 +13,12 @@ function TransferDetailsCard({ copiedField, onCopy, onBack, onNext }) {
           <div className="flex items-center gap-2 border-b border-white/[0.05] bg-white/[0.02] px-4 py-2.5">
             <Landmark size={15} className="text-[#c595ff] shadow-[0_0_8px_rgba(180,103,255,0.3)]" />
             <p className="[font-family:'Outfit',sans-serif] text-xs.5 font-bold tracking-wide text-white/90">
-              Online Bank Transfer
+              {content.transferTitle}
             </p>
           </div>
 
           <div className="grid gap-1.5 bg-black/10 px-3.5 py-3.5">
-            {bankDetails.map((item) => (
+            {content.bankDetails.map((item) => (
               <div
                 className="flex items-center justify-between gap-3 rounded-lg border border-white/5 bg-[#171224]/80 px-3 py-2 transition-all duration-300 hover:border-white/10"
                 key={item.label}
@@ -52,10 +51,10 @@ function TransferDetailsCard({ copiedField, onCopy, onBack, onNext }) {
         {/* Notes bulleted list in clean frame */}
         <div className="rounded-[18px] border border-white/[0.04] bg-white/[0.01] px-4 py-3.5">
           <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-[#b467ff] mb-2.5">
-            Important checkout notes
+            {content.supportNotesHeading}
           </p>
           <ul className="list-disc list-inside grid gap-1.5 text-[11.5px] text-white/80 px-0.5">
-            {supportNotes.map((note) => (
+            {content.supportNotes.map((note) => (
               <li key={note} className="leading-relaxed">
                 <span className="text-white/85">{note}</span>
               </li>
@@ -72,7 +71,7 @@ function TransferDetailsCard({ copiedField, onCopy, onBack, onNext }) {
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.98 }}
           >
-            Back
+            {content.transferBackButtonText}
           </motion.button>
           <motion.button
             onClick={onNext}
@@ -81,7 +80,7 @@ function TransferDetailsCard({ copiedField, onCopy, onBack, onNext }) {
             whileHover={{ y: -1.5, shadow: '0_10px_25px_rgba(31,143,138,0.35)' }}
             whileTap={{ scale: 0.98 }}
           >
-            <span>I've Made Payment</span>
+            <span>{content.transferButtonText}</span>
             <ArrowRight size={13} className="text-[#d7fffc]" />
           </motion.button>
         </div>

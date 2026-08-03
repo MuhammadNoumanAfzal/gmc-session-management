@@ -1,8 +1,7 @@
 import { CheckCircle2, Sparkles, ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { consultationIncludes, pricing } from '../../data/enrollment'
 
-function EnrollmentSummaryCard({ onNext }) {
+function EnrollmentSummaryCard({ content, onNext }) {
   return (
     <aside className="relative overflow-hidden rounded-[24px] border border-white/[0.08] bg-[#0f0c1b]/90 p-5 text-white shadow-[0_20px_50px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-xl">
       {/* Background ambient glow inside the card */}
@@ -11,14 +10,14 @@ function EnrollmentSummaryCard({ onNext }) {
       <div className="relative z-10">
         <div className="inline-flex items-center gap-1.5 rounded-full border border-[#b467ff]/30 bg-[#b467ff]/8 px-2.5 py-1 text-[9.5px] font-bold uppercase tracking-[0.1em] text-[#d7bbff]">
           <Sparkles size={11} className="animate-pulse text-[#b467ff]" />
-          {pricing.badge}
+          {content.summaryBadgeText}
         </div>
 
         <h1 className="mt-2.5 [font-family:'Outfit',sans-serif] text-[1.4rem] leading-[1.05] font-extrabold text-white tracking-tight">
-          Get enrolled now.
+          {content.summaryHeading}
         </h1>
         <p className="mt-1 text-xs text-white/70">
-          {pricing.subtitle}
+          {content.summarySubtitle}
         </p>
 
         {/* Premium Pricing block with glowing border */}
@@ -26,27 +25,27 @@ function EnrollmentSummaryCard({ onNext }) {
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-[#d7bbff]/85">
-                Discounted Slot Price
+                {content.priceLabel}
               </p>
               <div className="mt-0.5 flex items-baseline gap-2">
                 <span className="[font-family:'Outfit',sans-serif] text-[1.75rem] font-black tracking-tight bg-gradient-to-r from-white via-white to-[#c595ff] bg-clip-text text-transparent">
-                  {pricing.discountedPrice}
+                  {content.discountedPrice}
                 </span>
                 <span className="text-[11px] font-semibold text-white/30 line-through">
-                  {pricing.originalPrice}
+                  {content.originalPrice}
                 </span>
               </div>
             </div>
             <div className="sm:text-right">
               <span className="inline-flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.08em] text-[#ff8e9a] bg-[#ff5d6c]/10 border border-[#ff5d6c]/20 px-2 py-0.5 rounded-full">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#ff5d6c] animate-ping" />
-                {pricing.urgencyValue} Filled
+                {content.urgencyText}
               </span>
             </div>
           </div>
           <div className="mt-2.5">
             <div className="h-1 rounded-full bg-white/5 overflow-hidden">
-              <div className="h-full w-[90%] rounded-full bg-gradient-to-r from-[#b467ff] to-white" />
+              <div className="h-full rounded-full bg-gradient-to-r from-[#b467ff] to-white" style={{ width: `${content.progressPercentage}%` }} />
             </div>
           </div>
         </div>
@@ -54,10 +53,10 @@ function EnrollmentSummaryCard({ onNext }) {
         {/* What is included */}
         <div className="mt-4">
           <h3 className="text-[9px] font-bold uppercase tracking-[0.12em] text-[#b467ff] mb-2">
-            What is included in the session
+            {content.includesHeading}
           </h3>
           <div className="grid gap-1.5">
-            {consultationIncludes.map((item) => (
+            {content.includesItems.map((item) => (
               <div
                 className="flex items-center gap-2 rounded-xl border border-white/[0.03] bg-white/[0.02] px-3.5 py-2.5 transition-all duration-300 hover:bg-white/[0.04] hover:border-white/[0.06]"
                 key={item}
@@ -80,7 +79,7 @@ function EnrollmentSummaryCard({ onNext }) {
             whileHover={{ y: -1.5, shadow: '0_10px_25px_rgba(31,143,138,0.35)' }}
             whileTap={{ scale: 0.98 }}
           >
-            <span>Continue to Payment</span>
+            <span>{content.summaryButtonText}</span>
             <ArrowRight size={13} className="text-[#d7fffc]" />
           </motion.button>
         </div>
