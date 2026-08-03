@@ -7,10 +7,9 @@ import ProgramHeaderCard from '../features/program/ProgramHeaderCard'
 import ProgramStepPanels from '../features/program/ProgramStepPanels'
 import ProgramStepTracker from '../features/program/ProgramStepTracker'
 import { useEnrollmentFlowContent } from '../features/enrollment/hooks/useEnrollmentFlowContent'
+import { PAYMENT_PROOF_ENDPOINT } from '../config/env'
 
 function ProgramPage() {
-  const paymentProofEndpoint =
-    import.meta.env.VITE_PAYMENT_PROOF_ENDPOINT ?? 'http://127.0.0.1:8000/api/payment-proofs'
   const { content } = useEnrollmentFlowContent()
   const [copiedField, setCopiedField] = useState('')
   const [fileName, setFileName] = useState('')
@@ -38,6 +37,30 @@ function ProgramPage() {
   const headerRef = useRef(null)
   const [headerSpotlight, setHeaderSpotlight] = useState({ x: 0, y: 0 })
   const [isHeaderHovered, setIsHeaderHovered] = useState(false)
+
+  const getPaymentServerHelp = () => {
+    if (!PAYMENT_PROOF_ENDPOINT) {
+      return {
+        title: 'Backend URL not configured',
+        text: 'Set VITE_API_BASE_URL or VITE_PAYMENT_PROOF_ENDPOINT to your Laravel server URL before submitting payment proofs.',
+      }
+    }
+
+    const isSecurePage = typeof window !== 'undefined' && window.location.protocol === 'https:'
+    const usesInsecureApi = PAYMENT_PROOF_ENDPOINT.startsWith('http://')
+
+    if (isSecurePage && usesInsecureApi) {
+      return {
+        title: 'Secure site cannot reach local Laravel',
+        text: 'This HTTPS site cannot submit to an HTTP Laravel URL like 127.0.0.1:8000. Use a public HTTPS Laravel URL, or run the frontend locally with Laravel.',
+      }
+    }
+
+    return {
+      title: 'Server not reachable',
+      text: `Could not connect to the payment verification server at ${PAYMENT_PROOF_ENDPOINT}.`,
+    }
+  }
 
   useEffect(() => {
     setPaymentProofForm((current) => ({
@@ -194,7 +217,7 @@ function ProgramPage() {
     })
 
     try {
-      const response = await fetch(paymentProofEndpoint, {
+      const response = await fetch(PAYMENT_PROOF_ENDPOINT, {
         method: 'POST',
         body: formData,
         headers: {
@@ -242,6 +265,8 @@ function ProgramPage() {
         footer: data.submissionId ? `Submission ID: ${data.submissionId}` : '',
       })
     } catch {
+      const serverHelp = getPaymentServerHelp()
+
       setSubmitState({
         isSubmitting: false,
         isSuccess: false,
@@ -250,8 +275,8 @@ function ProgramPage() {
         fieldErrors: {},
       })
       await Swal.fire({
-        title: 'Server not reachable',
-        text: 'Could not connect to the payment verification server. Make sure Laravel is running on http://127.0.0.1:8000.',
+        title: serverHelp.title,
+        text: serverHelp.text,
         icon: 'error',
         confirmButtonText: 'Close',
         background: '#120f21',
